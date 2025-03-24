@@ -1,0 +1,97 @@
+# Creating and Managing Collections
+
+NFT collections on Raven House allow you to group related NFTs and define their common traits and economic parameters.
+
+## Collection Creation Process
+
+### 1. Access Collection Creation
+
+- Navigate to your Profile or click "Create" in the top navigation
+- Select "Create Collection"
+
+### 2. Define Collection Details
+
+![Collection Details Form](/img/docs/collection-details.png)
+
+- **Collection Name**: Give your collection a descriptive name
+- **Collection Symbol**: A short symbol to represent your collection (like a ticker symbol)
+- **Description**: Describe your collection's theme, story, and purpose
+- **Collection Image**: Upload a square image (recommended: 800×800px)
+- **Banner Image**: Upload a wide banner (recommended: 1400×400px)
+
+### 3. Define Traits
+
+Traits are attributes that can be assigned to NFTs in your collection. They define the properties that make each NFT unique.
+
+![Trait Definition Form](/img/docs/trait-definition.png)
+
+For each trait, specify:
+
+- **Trait Key**: The name of the trait (e.g., "Background", "Eyes", "Rarity")
+- **Type**: The data type of the trait:
+  - **Text**: String values (e.g., "Red", "Blue", "Rare")
+  - **Number**: Numeric values (e.g., 1, 2, 3, 10.5)
+  - **Yes/No**: Boolean values (true/false)
+- **Description**: (Optional) Explain what the trait represents
+
+Click "Add Trait" to add multiple traits to your collection.
+
+### 4. Set Economics & Supply
+
+![Economics Form](/img/docs/economics-form.png)
+
+Define the economic parameters of your collection:
+
+- **Mint Price**: The cost for users to mint an NFT from this collection (in RAVEN)
+- **Royalty Fee**: The percentage you earn from secondary sales
+- **Max Supply**: The maximum number of NFTs that can exist in this collection
+- **Mint Limit per Wallet**: The maximum number an individual wallet can mint
+- **Mint Start Date & Time**: (Optional) When minting will become available
+
+### 5. Review and Create
+
+Review all the details and click **Create Collection** to submit.
+
+## Launching Your Collection
+
+After creating a collection, you'll need to launch it to make it available for minting:
+
+1. Navigate to your Profile page
+2. Find your collection in the "Your Collections" section
+3. Click the "Launch" button
+{/* 4. Confirm the transaction in your wallet */}
+
+This deploys the smart contract for your collection on the Aztec Network.
+
+## Managing Your Collection
+
+### Viewing Your Collections
+
+Visit your Profile page to see all collections you've created.
+
+### Assigning Minter Role
+
+To allow others to mint NFTs in your collection:
+
+1. Go to your Profile page
+2. Find the collection and click "Assign Minter Role"
+3. Enter the wallet address of the user you want to designate as a minter
+4. Confirm the transaction
+
+{/* ### Uploading Multiple NFTs
+
+For collections with many NFTs, you can use the bulk upload feature:
+
+1. Navigate to your collection page
+2. Click "Upload NFTs"
+3. Prepare a ZIP file containing:
+   - An "images" folder with PNG images named sequentially (1.png, 2.png, etc.)
+   - A metadata.json file with details for each NFT
+4. Upload the ZIP file and confirm */}
+
+## Next Steps
+
+After creating your collection, you can:
+
+- [Mint NFTs in your collection](/guides/nfts)
+- [Set up Discord integration](/guides/discord) for NFT ownership verification

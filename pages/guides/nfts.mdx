@@ -1,0 +1,119 @@
+# Minting and Managing NFTs
+
+This guide covers how to mint NFTs in your collections and manage them on Raven House.
+
+## Minting a New NFT
+
+### 1. Access NFT Minting
+
+- Navigate to a collection page and click "Mint New NFT" 
+- Or click "Mint NFT" in the top navigation
+- Select a collection from the Select Collection dropdown
+
+### 2. NFT Details
+
+![NFT Minting Form](/img/docs/nft-mint-form.png)
+
+Fill in the basic information:
+
+- **NFT Name**: A unique name for your NFT
+- **Description**: (Optional) A detailed description of the NFT
+- **NFT Image**: Upload artwork for your NFT (recommended: 1200×1200px jpg, png, or gif)
+
+### 3. Trait Values
+
+![Trait Values Form](/img/docs/trait-values.png)
+
+For each trait defined in the collection, provide a value:
+
+- **Text traits**: Enter the appropriate text value
+- **Number traits**: Enter a numeric value
+- **Yes/No traits**: Enter Yes or No value
+{/* TODO: need to fix this, currently it's also showing text input instead of drodpwon */}
+{/* - **Yes/No traits**: Select Yes or No from the dropdown */}
+
+These traits will be stored with your NFT metadata and can be used for filtering and sorting.
+
+### 4. Mint the NFT
+
+Review your NFT details and click **Mint NFT**. You'll need to:
+
+{/* 1. Approve the transaction in your wallet */}
+1. Wait for the NFT to be minted on-chain
+2. The NFT image and metadata will be uploaded to IPFS via Pinata
+
+Once minted, your NFT will appear in your collection and in your profile.
+
+## NFT Privacy Options
+
+### Public vs Private NFTs
+
+Raven House allows for both public and private ownership of NFTs:
+
+- **Public ownership**: Visible on the blockchain, similar to traditional NFTs
+- **Private ownership**: Uses zero-knowledge proofs to shield ownership information
+
+### Transferring NFTs
+
+When transferring an NFT, you can choose between:
+
+- **Public transfer**: Standard transfer visible on the blockchain
+- **Private transfer**: Shields the transaction details
+
+To transfer an NFT:
+
+1. Navigate to the NFT detail page
+2. Click "Transfer NFT"
+3. Enter the recipient's address
+4. Choose the transfer type (Public or Private)
+5. Confirm the transaction
+
+## Listing NFTs for Sale
+
+To list an NFT for sale:
+
+1. Go to the NFT detail page
+2. Enter the price in RAVEN tokens
+3. Click "List for Sale"
+4. Confirm the transaction in your wallet
+
+Your NFT will now be visible to buyers on the marketplace.
+
+## Buying NFTs
+
+To purchase an NFT:
+
+1. Browse to the NFT you want to purchase
+2. Click "Buy Now"
+{/* 3. Confirm the purchase in your wallet */}
+3. The NFT will be transferred to your wallet after the transaction is confirmed
+
+## Managing Your NFTs
+
+### Viewing Your NFTs
+
+Visit your Profile page to see all NFTs you own, categorized by:
+
+- All NFTs
+- Public NFTs
+- Private NFTs
+
+### NFT Details Page
+
+The NFT details page shows:
+
+- NFT image and metadata
+- Trait values
+- Ownership information
+- Price (if listed for sale)
+{/* - Transaction history */}
+
+From here, you can transfer or list for sale.
+{/* From here, you can transfer, list for sale, or remove a listing. */}
+
+## Next Steps
+
+After minting NFTs, you can:
+
+- [Set up Discord integration](/guides/discord) to reward NFT holders
+- [Learn about privacy features](/guides/privacy) for your NFTs

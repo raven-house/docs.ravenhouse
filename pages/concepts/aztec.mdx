@@ -1,0 +1,90 @@
+# Aztec Network Overview
+
+Raven House is built on Aztec Network, a layer 2 privacy platform that enables confidential and efficient transactions on Ethereum.
+
+## What is Aztec Network?
+
+Aztec Network is a privacy-focused layer 2 blockchain that uses zero-knowledge proofs to enable private transactions on Ethereum. It allows applications to benefit from both the security of Ethereum and the privacy features of zero-knowledge cryptography.
+
+Key characteristics of Aztec Network include:
+
+- **Privacy-first**: Built from the ground up to enable confidential transactions
+- **ZK-Rollup**: Uses zero-knowledge rollups for scalability and low fees
+- **Noir Language**: Custom programming language for zero-knowledge applications
+- **EVM Compatibility**: Works with Ethereum while adding privacy features
+
+## How Raven House Uses Aztec
+
+Raven House leverages Aztec's privacy features to provide benefits that traditional NFT marketplaces can't offer:
+
+1. **Private NFT Ownership**: Shield your NFT ownership from public view
+2. **Confidential Transfers**: Transfer NFTs without revealing transaction details
+3. **Lower Gas Costs**: Benefit from layer 2 scaling through ZK-rollups
+4. **Secure Authentication**: Use zero-knowledge proofs for verification without revealing sensitive data
+
+{/* ## Aztec Account Structure
+
+Aztec uses a different account structure than standard Ethereum addresses:
+
+- **Aztec Address**: Addresses start with `aztec:` followed by the network ID and actual address
+- **Account Types**: Different account types support various privacy features
+- **Key Management**: Managed through compatible wallets like Azguard
+
+When using Raven House, your Aztec address will be used for all transactions and NFT operations. */}
+
+## Zero-Knowledge Proofs
+
+At the core of Aztec are zero-knowledge proofs (ZKPs), which allow one party to prove to another that a statement is true without revealing any information beyond the validity of the statement itself.
+
+In the context of NFTs:
+
+- A ZKP can prove you own an NFT without revealing which NFT
+- A ZKP can verify a transfer happened without revealing the specific details
+- A ZKP can confirm eligibility without exposing your entire collection
+
+## Notes and Nullifiers
+
+Aztec uses a note-based system for privacy:
+
+- **Notes**: Encrypted records that represent ownership of assets
+- **Nullifiers**: Prevent double-spending while maintaining privacy
+- **Viewing Keys**: Allow selective disclosure to authorized parties
+
+When you own an NFT privately on Raven House, it's stored as a note that only you can decrypt and prove ownership of.
+
+## Noir Language
+
+Noir is a domain-specific language for writing zero-knowledge circuits, used to develop the smart contracts for Raven House.
+
+Key features:
+
+- **Aztec-native**: Designed specifically for the Aztec ecosystem
+- **Circuit-friendly**: Optimized for creating efficient zero-knowledge proofs
+- **Security-focused**: Helps developers avoid common pitfalls
+
+The NFT contracts on Raven House are written in Noir to leverage the full privacy capabilities of Aztec.
+
+{/* ## Connecting to Aztec
+
+To use Raven House, you'll need to:
+
+1. Install the [Azguard Wallet](https://azguard.io)
+2. Create or import an Aztec account
+3. Connect your wallet to Raven House
+
+The platform will guide you through this process when you click "Connect Wallet." */}
+
+{/* ## Network Status
+
+Aztec Network is currently in testnet phase. Raven House is designed to work with both testnet and mainnet when available.
+
+- **Testnet**: Available now for testing and development
+- **Mainnet**: Coming soon */}
+
+## Resources
+
+To learn more about Aztec Network:
+
+- [Official Aztec Documentation](https://docs.aztec.network/)
+- [Noir Language Documentation](https://noir-lang.org/docs/)
+- [Aztec Network GitHub](https://github.com/AztecProtocol)

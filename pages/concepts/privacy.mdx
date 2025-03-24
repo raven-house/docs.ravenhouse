@@ -1,0 +1,94 @@
+# Privacy Features Explained
+
+Raven House leverages Aztec Network's zero-knowledge proof technology to offer advanced privacy features for NFT trading.
+
+## Understanding Privacy in NFTs
+
+Traditional NFT marketplaces operate on transparent blockchains where all transactions are visible to everyone. Raven House changes this paradigm by offering:
+
+- **Privacy-preserving transactions**: Hide transfer details from public view
+- **Confidential ownership**: Shield your NFT holdings
+{/* - **Private bids and offers**: Keep your interests private */}
+{/* - **Selective disclosure**: Choose what information to reveal */}
+## How Privacy Works on Raven House
+
+### Zero-Knowledge Proofs
+
+Raven House uses zero-knowledge proofs (ZKPs) through the Aztec Network to enable privacy. ZKPs allow one party to prove to another that a statement is true without revealing any information beyond the validity of the statement itself.
+
+For NFTs, this means:
+
+- You can prove you own an NFT without revealing which NFT
+- You can transfer an NFT without making the transaction public
+- You can verify eligibility for airdrops or whitelists without exposing your entire wallet
+
+### Public vs Private State
+
+NFTs on Raven House can exist in two states:
+
+**Public State**:
+- Visible on the blockchain
+- Similar to traditional NFTs
+- Full transparency of ownership and transfers
+
+**Private State**:
+- Ownership information is shielded
+- Transfers are confidential
+- Only the owner can prove ownership
+
+![Public vs Private NFTs](/img/docs/public-private.png)
+
+## Privacy Features in Practice
+
+### Private NFT Transfers
+
+When transferring an NFT privately:
+
+1. The transaction details are encrypted
+2. Zero-knowledge proofs verify the validity of the transfer
+3. The NFT moves to the recipient's private balance
+4. No public record of the specific NFT transferred is created
+
+{/* ### Privacy-Preserving Verification
+
+For Discord role verification:
+
+1. The user connects their wallet to the verification system
+2. Zero-knowledge proofs verify NFT ownership without revealing which specific NFTs they own
+3. The verification system confirms eligibility without accessing the user's full wallet data
+4. The appropriate Discord role is assigned
+
+### Selective Disclosure
+
+Users can choose to:
+
+- Keep their entire NFT collection private
+- Make some NFTs public while keeping others private
+- Reveal ownership of specific NFTs for verification purposes
+- Toggle between public and private states as needed */}
+{/* 
+TODO: Need to confirm this
+## Technical Implementation
+
+Raven House implements privacy through:
+
+- **Private notes**: Encrypted records of ownership
+- **Nullifiers**: Prevent double-spending while maintaining privacy
+- **Viewing keys**: Allow selective disclosure to authorized parties
+- **Zero-knowledge circuits**: Validate transactions without revealing data */}
+{/* 
+## Privacy Considerations
+
+While Raven House provides strong privacy guarantees, users should be aware of:
+
+- **Metadata leakage**: Information outside the blockchain may reveal ownership
+- **Correlation risks**: Patterns of activity may still be observable
+- **Regulatory compliance**: Privacy features are designed for legitimate use cases, not to circumvent regulations */}
+
+## Next Steps
+
+To learn more about privacy on Raven House:
+
+- [Check out the Aztec Network documentation](/concepts/aztec)
+- [Learn about private transfers in our NFT guide](/guides/nfts)
+- [Understand the RAVEN token privacy features](/concepts/tokens)
