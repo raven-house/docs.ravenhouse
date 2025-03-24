@@ -1,15 +1,30 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
+  "index": {
+    "title": "Introduction",
     "type": "page"
   },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://x.com/ravenhousenft",
-    "newWindow": true
+  "getting-started": {
+    "title": "Getting Started",
+    "type": "page"
+  },
+  "guides": {
+    "title": "User Guides",
+    "type": "menu",
+    "items": {
+      "collections": "Collections",
+      "nfts": "NFTs",
+      "discord": "Discord Integration",
+      "privacy": "Privacy Features"
+    }
+  },
+  "concepts": {
+    "title": "Core Concepts",
+    "type": "menu",
+    "items": {
+      "aztec": "Aztec Network",
+      "privacy": "Privacy Explained",
+      "tokens": "RAVEN Token"
+    }
   }
+
 }

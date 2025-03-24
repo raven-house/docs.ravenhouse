@@ -1,0 +1,129 @@
+# Discord Integration Guide
+
+Raven House offers seamless integration with Discord, allowing you to verify NFT ownership and automatically assign roles to NFT holders in your server.
+
+## Overview
+
+The Discord integration involves three main steps:
+
+1. Adding the Raven House bot to your Discord server
+2. Creating a role for NFT holders in your server
+3. Linking your NFT collection to the Discord server and role
+
+## Step 1: Add the Raven House Bot
+
+### Adding the Bot
+
+1. Navigate to **Discord Integration** in the Raven House navigation
+2. Click the **Add to Discord** button
+3. Select the server where you want to add the bot
+4. Grant the necessary permissions
+5. Complete the Discord authorization process
+
+![Bot Addition](/img/docs/discord-bot-add.png)
+{/* //TODO: Need to review these permissions */}
+The bot will need permissions to:
+- Manage roles
+- Read messages
+- Send messages
+
+## Step 2: Create a Role in Discord
+
+Before linking your collection, create a role in Discord that will be assigned to NFT holders:
+
+1. Open your Discord server settings
+2. Navigate to Roles
+3. Click the `Create Role` button to create a new role
+4. Name it appropriately (e.g., "NFT Holder", "VIP Member")
+5. Set the desired permissions and display options
+6. Save the role
+
+### Getting the Role ID
+
+To link this role to your NFT collection, you'll need its ID:
+
+1. Enable Developer Mode in Discord (User Settings > Advanced > Developer Mode)
+2. Right-click on the role in your server settings
+3. Select `Copy Role ID`
+4. Save this ID for the next step
+
+## Step 3: Link Collection to Discord
+
+Now you'll connect your NFT collection to your Discord server and role:
+
+1. In Raven House, navigate to **Discord Integration** > **Link Server**
+2. Fill in the required information:
+   - **Discord Server ID**: Your server's ID (with Developer Mode enabled, right-click your server and select `Copy Server ID`)
+   - **Collection**: Select the NFT collection to link from the dropdown
+   - **Role ID**: Paste the role ID you copied earlier
+3. Click **Create Integration**
+
+![Link Collection Form](/img/docs/discord-link-form.png)
+
+## Verification Process
+
+Once set up, users can verify their NFT ownership by discord command
+{/* Once set up, users can verify their NFT ownership in two ways: */}
+
+### Discord Command
+
+Users can type `/verify` in your Discord server to start the verification process.
+
+{/* ### Method 2: Verification Link
+
+You can generate and share a verification link:
+
+1. Go to **Discord Integration** > **Manage Integrations**
+2. Find your integration and click "Get Verify Link"
+3. Share this link with your community */}
+
+## Verification Flow
+
+When a user initiates verification:
+
+1. They'll be directed to a verification page
+2. They'll connect their wallet
+3. The system checks if they own an NFT from your collection
+4. If verified, they automatically receive the designated role
+5. The verification window closes
+
+![Verification Flow](/img/docs/verification-flow.png)
+
+## Managing Integrations
+
+View and manage your Discord integrations:
+
+1. Navigate to **Discord Integration** > **Manage Integrations**
+2. Here you can:
+   - View all your integrations
+   - Delete integrations
+   {/* - Generate verification links */}
+
+## Troubleshooting
+
+### Bot Not Assigning Roles
+
+Ensure the bot has:
+- The "Manage Roles" permission
+- A role position higher than the role it's trying to assign
+
+### Verification Failing
+
+Possible causes:
+- User doesn't own an NFT from the collection
+- Wallet not connected correctly
+- Contract address mismatch
+
+### User Already Verified
+
+A user can only verify once per Discord account. If they need to re-verify:
+- Remove their existing role
+- Ask them to try again
+
+## Next Steps
+
+After setting up Discord integration, consider:
+
+- Announcing the verification process to your community
+- Creating exclusive Discord channels for verified NFT holders
+{/* - Setting up additional roles for different NFT collections or rarity tiers */}
