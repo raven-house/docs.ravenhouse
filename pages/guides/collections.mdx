@@ -4,12 +4,9 @@ NFT collections on Raven House allow you to group related NFTs and define their 
 
 ## Collection Creation Process
 
-### 1. Access Collection Creation
+The collection creation process is now a multi-step wizard that guides you through each phase:
 
-- Navigate to your Profile or click "Create" in the top navigation
-- Select "Create Collection"
-
-### 2. Define Collection Details
+### Step 1: Collection Details
 
 ![Collection Details Form](/img/docs/collection-details.png)
 
@@ -19,7 +16,7 @@ NFT collections on Raven House allow you to group related NFTs and define their 
 - **Collection Image**: Upload a square image (recommended: 800×800px)
 - **Banner Image**: Upload a wide banner (recommended: 1400×400px)
 
-### 3. Define Traits
+### Step 2: Define Traits
 
 Traits are attributes that can be assigned to NFTs in your collection. They define the properties that make each NFT unique.
 
@@ -36,7 +33,7 @@ For each trait, specify:
 
 Click "Add Trait" to add multiple traits to your collection.
 
-### 4. Set Economics & Supply
+### Step 3: Economics & Supply
 
 ![Economics Form](/img/docs/economics-form.png)
 
@@ -44,13 +41,25 @@ Define the economic parameters of your collection:
 
 - **Mint Price**: The cost for users to mint an NFT from this collection (in RAVEN)
 - **Royalty Fee**: The percentage you earn from secondary sales
-- **Max Supply**: The maximum number of NFTs that can exist in this collection
-- **Mint Limit per Wallet**: The maximum number an individual wallet can mint
+- **Max Supply**: The maximum number of NFTs that can exist in this collection (check "Set unlimited supply" for no limit)
+- **Mint Limit per Wallet**: The maximum number an individual wallet can mint (check "No limit per wallet" for unlimited)
 - **Mint Start Date & Time**: (Optional) When minting will become available
+- **Public Minting**: Toggle whether anyone can mint from this collection or only approved wallets
 
-### 5. Review and Create
+### Step 4: Upload NFTs (Optional)
 
-Review all the details and click **Create Collection** to submit.
+After creating the collection, you can immediately upload NFTs:
+
+- You can upload a ZIP file containing:
+  - An "images" folder with PNG images named sequentially (1.png, 2.png, etc.)
+  - A metadata.json file with details for each NFT
+- This step can be skipped and done later from your collection page
+
+### Step 5: Launch Collection (Optional)
+
+- You can deploy your collection to the Aztec network immediately after creation
+- This step requires having the RAVEN token deployed first
+- You can also choose to launch your collection later from your profile page
 
 ## Launching Your Collection
 
@@ -59,7 +68,6 @@ After creating a collection, you'll need to launch it to make it available for m
 1. Navigate to your Profile page
 2. Find your collection in the "Your Collections" section
 3. Click the "Launch" button
-{/* 4. Confirm the transaction in your wallet */}
 
 This deploys the smart contract for your collection on the Aztec Network.
 
@@ -78,7 +86,7 @@ To allow others to mint NFTs in your collection:
 3. Enter the wallet address of the user you want to designate as a minter
 4. Confirm the transaction
 
-{/* ### Uploading Multiple NFTs
+### Uploading Multiple NFTs
 
 For collections with many NFTs, you can use the bulk upload feature:
 
@@ -86,12 +94,38 @@ For collections with many NFTs, you can use the bulk upload feature:
 2. Click "Upload NFTs"
 3. Prepare a ZIP file containing:
    - An "images" folder with PNG images named sequentially (1.png, 2.png, etc.)
-   - A metadata.json file with details for each NFT
-4. Upload the ZIP file and confirm */}
+   - A metadata.json file with details for each NFT (example format shown below)
+4. Upload the ZIP file and validate
+5. Process the upload to add NFTs to your collection
 
-## Next Steps
-
-After creating your collection, you can:
-
-- [Mint NFTs in your collection](/guides/nfts)
-- [Set up Discord integration](/guides/discord) for NFT ownership verification
+Example metadata.json format:
+```json
+{
+  "count": 3,
+  "nfts": [
+    {
+      "name": "NFT #1",
+      "description": "Description for NFT #1",
+      "traits": [
+        { "trait_type": "background", "value": "blue" },
+        { "trait_type": "is rare", "value": true }
+      ]
+    },
+    {
+      "name": "NFT #2",
+      "description": "Description for NFT #2",
+      "traits": [
+        { "trait_type": "background", "value": "red" },
+        { "trait_type": "is rare", "value": false }
+      ]
+    },
+    {
+      "name": "NFT #3",
+      "description": "Description for NFT #3",
+      "traits": [
+        { "trait_type": "background", "value": "green" },
+        { "trait_type": "is rare", "value": true }
+      ]
+    }
+  ]
+}
