@@ -1,0 +1,40 @@
+## Wallet Stuck on "Loading wallet on popup..."
+
+### 🛠️ Problem
+When trying to connect your Obsidian wallet to the RavenHouse dApp, the UI may get stuck on:
+
+> "Loading wallet on popup..."
+
+This typically happens when the connection bridge between the wallet and the RavenHouse app is interrupted or becomes unstable — a common occurrence on early-stage networks like the Aztec Testnet.
+
+<figure>
+  <>![Loading Wallet Issue](/img/docs/loading-wallet.png)</>
+</figure>
+
+
+### 🧩 Cause
+- The wallet popup may not fully initialize or connect.
+- Bridge communication between dApp and wallet times out.
+- A prior session/token might be cached but expired.
+
+### ✅ Solution
+1. Disconnect your wallet from RavenHouse:
+    - Click on your wallet address in the top-right corner.
+    - Select Disconnect from the dropdown.
+    - <figure>![Disconnect Wallet](/img/docs/disconnect-wallet.png)</figure>
+
+
+2. Refresh the page.
+
+3. Reconnect your wallet using the Connect Wallet button.
+
+4. If the issue persists, try:
+    - Clearing your browser cache for the app domain.
+    - Fully restarting the browser or using incognito mode.
+
+---
+
+> [!NOTE]
+>
+> These issues are common on the Aztec Testnet as the ecosystem is still in early development. Please bear with us while the experience improves over time.
+
