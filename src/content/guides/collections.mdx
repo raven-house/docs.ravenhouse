@@ -1,26 +1,52 @@
 # Creating and Managing Collections
 
-NFT collections on Raven House allow you to group related NFTs and define their common traits and economic parameters.
+NFT collections on Raven House allow you to group related NFTs and define their common traits and economic parameters. The collection creation process is a guided three-step wizard.
+
+## Video Guide
+
+Watch this comprehensive video tutorial that walks through the entire collection creation process:
+
+<iframe 
+  width="100%" 
+  height="400" 
+  src="https://www.youtube.com/embed/TGUKf2CTQSM" 
+  title="How to Create and Launch an NFT Collection on Raven House" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowFullScreen
+></iframe>
+
+*This video covers the complete process from collection creation to launch, including tips and best practices.*
 
 ## Collection Creation Process
 
-The collection creation process is now a multi-step wizard that guides you through each phase:
+The collection creation is divided into three main steps that guide you through the entire process:
 
-### Step 1: Collection Details
+### Step 1: Create Collection
 
-![Collection Details Form](/img/docs/collection-details.png)
+This step covers the basic collection setup including details, traits, and economics.
 
+#### Collection Details
+
+
+<figure>
+  <>![Collection Details Form](/img/docs/collection-details.png)</>
+</figure>
+
+
+**Basic Information:**
 - **Collection Name**: Give your collection a descriptive name
 - **Collection Symbol**: A short symbol to represent your collection (like a ticker symbol)
 - **Description**: Describe your collection's theme, story, and purpose
 - **Collection Image**: Upload a square image (recommended: 800×800px)
 - **Banner Image**: Upload a wide banner (recommended: 1400×400px)
 
-### Step 2: Define Traits
+#### Define Traits
 
 Traits are attributes that can be assigned to NFTs in your collection. They define the properties that make each NFT unique.
 
+<figure>
 ![Trait Definition Form](/img/docs/trait-definition.png)
+</figure>
 
 For each trait, specify:
 
@@ -33,51 +59,121 @@ For each trait, specify:
 
 Click "Add Trait" to add multiple traits to your collection.
 
-### Step 3: Economics & Supply
+#### Economics & Supply
 
+<figure>
 ![Economics Form](/img/docs/economics-form.png)
+</figure>
 
 Define the economic parameters of your collection:
 
-- **Mint Price**: The cost for users to mint an NFT from this collection (in RAVEN)
-- **Royalty Fee**: The percentage you earn from secondary sales
+- **Mint Price**: The cost for users to mint an NFT from this collection (in USDC)
+- **Royalty Fee**: *(Coming Soon)* The percentage you earn from secondary sales
 - **Max Supply**: The maximum number of NFTs that can exist in this collection (check "Set unlimited supply" for no limit)
 - **Mint Limit per Wallet**: The maximum number an individual wallet can mint (check "No limit per wallet" for unlimited)
-- **Mint Start Date & Time**: (Optional) When minting will become available
+- **Mint Start Date & Time**: *(Coming Soon)* When minting will become available
 - **Public Minting**: Toggle whether anyone can mint from this collection or only approved wallets
 
-### Step 4: Upload NFTs (Optional)
+After completing all sections, click **Create Collection** to proceed to Step 2.
 
-After creating the collection, you can immediately upload NFTs:
+> **Note**: You can edit collection details by clicking "Go Back" from Step 2, but only if the collection hasn't been launched yet.
 
-- You can upload a ZIP file containing:
-  - An "images" folder with PNG images named sequentially (1.png, 2.png, etc.)
-  - A metadata.json file with details for each NFT
-- This step can be skipped and done later from your collection page
+### Step 2: Upload NFTs (Optional)
 
-### Step 5: Launch Collection (Optional)
+After creating your collection, you can upload NFTs in bulk or skip this step to add them later.
+<figure>
+![Upload NFTs Interface](/img/docs/upload-nfts.png)
+</figure>
 
-- You can deploy your collection to the Aztec network immediately after creation
-- This step requires having the RAVEN token deployed first
-- You can also choose to launch your collection later from your profile page
+#### Bulk Upload Process
 
-## Launching Your Collection
+1. **Prepare Your Files**: Create a ZIP file containing:
+   - An **images** folder with PNG images named sequentially (1.png, 2.png, 3.png, etc.)
+   - A **metadata.json** file with details for each NFT
 
-After creating a collection, you'll need to launch it to make it available for minting:
+2. **Upload and Validate**: 
+   - Upload your ZIP file
+   - Click "Validate ZIP" to check the format
+   - Review any validation errors and fix them
 
-1. Navigate to your Profile page
-2. Find your collection in the "Your Collections" section
-3. Click the "Launch" button
+3. **Process Upload**:
+   - Once validated, click "Upload to Collection"
+   - NFTs will be added to your collection database
 
-This deploys the smart contract for your collection on the Aztec Network.
+#### Example metadata.json format:
+```json
+{
+  "count": 3,
+  "nfts": [
+    {
+      "name": "Cool Cat #1",
+      "description": "A rare cool cat with blue background",
+      "traits": [
+        { "trait_type": "background", "value": "blue" },
+        { "trait_type": "rarity", "value": "rare" },
+        { "trait_type": "has_hat", "value": true }
+      ]
+    },
+    {
+      "name": "Cool Cat #2", 
+      "description": "A common cool cat with red background",
+      "traits": [
+        { "trait_type": "background", "value": "red" },
+        { "trait_type": "rarity", "value": "common" },
+        { "trait_type": "has_hat", "value": false }
+      ]
+    }
+  ]
+}
+```
 
-## Managing Your Collection
+#### Alternative Options
+
+- **Skip This Step**: Continue to launch without uploading NFTs
+- **Upload Later**: Add NFTs from your collection page after launching
+{/* - **Individual Minting**: Create NFTs one by one using the "Mint New NFT" feature */}
+
+### Step 3: Launch Collection
+
+The final step deploys your collection smart contract to the Aztec Network.
+<figure>
+![Launch Collection Interface](/img/docs/launch-collection.png)
+</figure>
+#### What Happens During Launch
+
+1. **Smart Contract Deployment**: Your collection becomes a smart contract on Aztec
+2. **On-Chain Registration**: Collection details are stored on the blockchain
+3. **Minting Activation**: Users can now mint NFTs from your collection
+
+#### Launch Process
+
+1. **Review Collection**: Verify all details are correct
+2. **Connect Wallet**: Ensure your wallet is connected
+3. **Deploy Contract**: Click "Launch Collection" and confirm the transaction
+4. **Wait for Confirmation**: The deployment process may take a few minutes
+
+#### After Launch
+
+- Your collection will have a contract address
+- Users can start minting NFTs
+- You can assign minter roles to other wallets
+- Collection details cannot be edited anymore
+
+> **Important**: Once launched, collection details (name, symbol, traits, economics) cannot be modified.
+
+## Post-Launch Management
 
 ### Viewing Your Collections
 
-Visit your Profile page to see all collections you've created.
+Visit your **Profile** page to see all collections you've created, showing:
 
-### Assigning Minter Role
+- Collection status (launched or not launched)
+{/* - Contract addresses for launched collections */}
+{/* - Management options for each collection */}
+
+### Managing Launched Collections
+
+#### Assigning Minter Role
 
 To allow others to mint NFTs in your collection:
 
@@ -86,46 +182,63 @@ To allow others to mint NFTs in your collection:
 3. Enter the wallet address of the user you want to designate as a minter
 4. Confirm the transaction
 
-### Uploading Multiple NFTs
+#### Uploading NFTs After Launch
 
-For collections with many NFTs, you can use the bulk upload feature:
+You can still add NFTs to launched collections:
 
 1. Navigate to your collection page
-2. Click "Upload NFTs"
-3. Prepare a ZIP file containing:
-   - An "images" folder with PNG images named sequentially (1.png, 2.png, etc.)
-   - A metadata.json file with details for each NFT (example format shown below)
-4. Upload the ZIP file and validate
-5. Process the upload to add NFTs to your collection
+2. Click "Upload Collection Metadata"
+3. Follow the same ZIP upload process described in Step 2
 
-Example metadata.json format:
-```json
-{
-  "count": 3,
-  "nfts": [
-    {
-      "name": "NFT #1",
-      "description": "Description for NFT #1",
-      "traits": [
-        { "trait_type": "background", "value": "blue" },
-        { "trait_type": "is rare", "value": true }
-      ]
-    },
-    {
-      "name": "NFT #2",
-      "description": "Description for NFT #2",
-      "traits": [
-        { "trait_type": "background", "value": "red" },
-        { "trait_type": "is rare", "value": false }
-      ]
-    },
-    {
-      "name": "NFT #3",
-      "description": "Description for NFT #3",
-      "traits": [
-        { "trait_type": "background", "value": "green" },
-        { "trait_type": "is rare", "value": true }
-      ]
-    }
-  ]
-}
+{/* #### Contract Verification
+
+If you switch networks or PXE environments, you may need to redeploy:
+
+1. The system will show "Contract not found in current PXE"
+2. Click "Redeploy Contract" to deploy to the new environment
+3. This creates a new instance while keeping your collection data */}
+
+{/* ### Individual NFT Minting
+
+For creating single NFTs:
+
+1. Navigate to your collection page and click "Mint New NFT"
+2. Or use the "Mint NFT" option in the navigation
+3. Fill in NFT details and trait values
+4. Upload the NFT image
+5. Confirm the minting transaction */}
+
+## Best Practices
+
+### Planning Your Collection
+
+- **Define traits early**: Plan your trait structure before creating the collection
+- **Consider economics**: Set appropriate mint prices and supply limits
+- **Prepare assets**: Have your images ready in the correct format before uploading
+
+### Managing Supply
+
+- **Set realistic limits**: Consider your community size when setting max supply
+- **Plan mint limits**: Balance accessibility with preventing hoarding
+- **Monitor minting**: Keep track of how many NFTs are minted
+
+### Community Engagement
+
+- **Announce launches**: Let your community know when you're launching
+- **Set expectations**: Communicate mint prices and availability clearly
+- **Use Discord integration**: Set up role verification for NFT holders
+
+## Troubleshooting
+
+### Common Issues
+
+- **Validation errors**: Ensure your ZIP file structure matches the requirements exactly
+- **Contract deployment fails**: Check your wallet connection and try again
+{/* - **Images not displaying**: Verify image formats are PNG and properly named */}
+
+### Getting Help
+
+If you encounter issues:
+- Check our [Discord community](https://discord.gg/CR8nKg5gYB) for support
+- Review the [wallet connection guide](https://docs.ravenhouse.xyz/getting-started) if having wallet issues
+{/* - Contact our team through the platform for technical support */}
