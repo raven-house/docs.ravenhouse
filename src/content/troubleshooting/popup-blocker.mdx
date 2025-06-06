@@ -5,7 +5,7 @@ description: "Resolve wallet popup blocking when minting NFTs"
 
 # Fix Popup Blocker Issues
 
-If you're getting an error like "Failed to open popup. It may have been blocked by the browser" when trying to mint NFTs, your browser is blocking wallet popups. Here's how to fix it:
+If you're getting an error like "Failed to open popup. It may have been blocked by the browser" when trying to mint NFTs, your browser is blocking the Obsidion wallet popup. Here's how to fix it:
 
 ## Quick Fix Links
 
@@ -15,7 +15,9 @@ If you're getting an error like "Failed to open popup. It may have been blocked 
 - **Chrome**: `chrome://settings/content/popups`  
 - **Edge**: `edge://settings/content/popups`
 
-Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use redirects" section.
+Then add these sites to the "Allowed to send pop-ups and use redirects" section:
+- `https://app.obsidion.xyz` *(required - this is the wallet)*
+- `https://app.ravenhouse.xyz` *(recommended - this is our app)*
 
 ## Step-by-Step Instructions
 
@@ -26,9 +28,10 @@ Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use red
 3. In the left sidebar, click **Privacy and security**
 4. Click **Site settings**
 5. Scroll down and click **Pop-ups and redirects**
-6. Choose either:
-   - **Sites can send pop-ups and use redirects** (to allow all)
-   - **OR** under "Customized behaviors", add `https://app.obsidion.xyz/` under **Allowed to send pop-ups and use redirects**
+6. Under "Customized behaviors", click **Add** next to "Allowed to send pop-ups and use redirects"
+7. Add these sites one by one:
+   - `https://app.obsidion.xyz`
+   - `https://app.ravenhouse.xyz`
 
 ### ✅ Brave Browser
 
@@ -36,7 +39,10 @@ Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use red
 2. Click the 3-line menu (top-right) → **Settings**
 3. Go to **Privacy and security** → **Site and Shields Settings**
 4. Click **Pop-ups and redirects**
-5. Toggle to **Allow** or add `https://app.obsidion.xyz/` to allowed sites
+5. Click **Add** under "Allowed to send pop-ups and use redirects"
+6. Add these sites:
+   - `https://app.obsidion.xyz`
+   - `https://app.ravenhouse.xyz`
 
 ### ✅ Mozilla Firefox
 
@@ -44,9 +50,9 @@ Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use red
 2. Click the 3-line menu (top-right) → **Settings**
 3. Click **Privacy & Security** from the sidebar
 4. Scroll to **Permissions** → look for **Block pop-up windows**
-5. Either:
-   - **Uncheck** "Block pop-up windows" to allow all
-   - **OR** click **Exceptions...** and add `https://app.obsidion.xyz/`
+5. Click **Exceptions...** and add:
+   - `https://app.obsidion.xyz`
+   - `https://app.ravenhouse.xyz`
 
 ### ✅ Microsoft Edge
 
@@ -54,7 +60,9 @@ Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use red
 2. Click the 3-dot menu (top-right) → **Settings**
 3. Navigate to **Cookies and site permissions**
 4. Scroll down and click **Pop-ups and redirects**
-5. Set to **Allow** for all sites **OR** add `https://app.obsidion.xyz/` under **Allow** section
+5. Click **Add** under **Allow** section and add:
+   - `https://app.obsidion.xyz`
+   - `https://app.ravenhouse.xyz`
 
 ### ✅ Safari (macOS)
 
@@ -62,7 +70,14 @@ Then add `https://app.obsidion.xyz/` to the "Allowed to send pop-ups and use red
 2. Go to top menu → **Safari** > **Settings** (or Preferences)
 3. Go to the **Websites** tab
 4. Select **Pop-up Windows** in the sidebar
-5. For `app.ravenhouse.xyz`, choose **Allow** from the dropdown
+5. For both sites, choose **Allow** from the dropdown:
+   - `app.obsidion.xyz`
+   - `app.ravenhouse.xyz`
+
+## Why These Sites?
+
+- **`app.obsidion.xyz`** - The Obsidion wallet that opens in a popup when you mint
+- **`app.ravenhouse.xyz`** - Our NFT marketplace that initiates the wallet popup
 
 ## Still Having Issues?
 
