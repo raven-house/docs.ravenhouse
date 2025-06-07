@@ -1,23 +1,29 @@
 ---
-title: "Fix Popup Blocker Issues"
-description: "Resolve wallet popup blocking when minting NFTs"
+title: 'Fix Popup Blocker Issues'
+description: 'Resolve wallet popup blocking when minting NFTs'
 ---
 
 # Fix Popup Blocker Issues
 
 If you're getting an error like "Failed to open popup. It may have been blocked by the browser" when trying to mint NFTs, your browser is blocking the Obsidion wallet popup. Here's how to fix it:
 
+<figure>
+  <>![Allow Popup](/img/docs/allow_popup.png)</>
+  <figcaption>Allow popup example in brave browser</figcaption>
+</figure>
+
 ## Quick Fix Links
 
 **For Chromium-based browsers (Chrome, Brave, Edge), paste these URLs directly in your address bar:**
 
 - **Brave**: `brave://settings/content/popups`
-- **Chrome**: `chrome://settings/content/popups`  
+- **Chrome**: `chrome://settings/content/popups`
 - **Edge**: `edge://settings/content/popups`
 
 Then add these sites to the "Allowed to send pop-ups and use redirects" section:
-- `https://app.obsidion.xyz` *(required - this is the wallet)*
-- `https://app.ravenhouse.xyz` *(recommended - this is our app)*
+
+- `https://app.obsidion.xyz` _(required - this is the wallet)_
+- `https://app.ravenhouse.xyz` _(recommended - this is our app)_
 
 ## Step-by-Step Instructions
 
