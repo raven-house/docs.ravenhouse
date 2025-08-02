@@ -1,0 +1,159 @@
+# Advanced Minting: Whitelist & Public Stages
+
+Raven House now supports advanced minting configurations with **Whitelist Stages** and **Public Stages**, giving collection creators complete control over their NFT launches.
+
+## Overview
+
+The new minting system allows you to:
+- **Create exclusive whitelist phases** with custom pricing and duration
+- **Set up public minting phases** that start after whitelist ends
+- **Control who can mint** at each stage
+- **Offer different pricing** for different user groups
+- **Create whitelist-only collections** by disabling public minting entirely
+
+## Minting Stage Types
+
+### Whitelist Stage
+- **Who can mint**: Only pre-approved wallet addresses
+- **Custom pricing**: Set different prices for whitelisted users
+- **Time-limited**: Configure exact duration in days and hours
+- **Priority access**: Always runs before public stages
+
+### Public Stage
+- **Who can mint**: Anyone with a wallet
+- **Public pricing**: Standard pricing for general public
+- **Sequential timing**: Starts automatically after whitelist stage ends
+- **Optional**: Can be disabled for whitelist-only drops
+
+## Setting Up Mint Stages
+
+### Step 1: Configure Basic Timing
+
+Before adding specific stages, set your collection's overall minting parameters:
+
+1. **Mint Start Date & Time**: When the first minting stage begins
+2. **Public Minting Toggle**: Choose whether to allow public minting at all
+
+![Mint Time And Public Minting Toggle](/img/docs/whitelist-mint/mint_time_and_public_minting_toggle.png)
+
+### Step 2: Choose Your Minting Strategy
+
+You have two main approaches:
+
+#### Option A: Whitelist + Public Minting 
+Perfect for building hype with early access while still allowing public participation.
+
+#### Option B: Whitelist-Only Minting
+Ideal for exclusive drops or limited community releases.
+
+## Option A: Whitelist + Public Minting Setup
+
+When **Public Minting is enabled**, you'll see two configuration buttons:
+
+### Adding a Whitelist Stage
+
+1. Click **"Add Whitelist Stage"**
+2. The configuration modal will open with three fields:
+   - **Mint Price (Whitelist)**: Special price for whitelisted users (e.g., 100 USDC)
+   - **Stage Duration - Days**: How many full days the whitelist runs
+   - **Stage Duration - Hours**: Additional hours for fine-tuned timing
+
+![Whitelist stage modal](/img/docs/whitelist-mint/whitelist_stage_modal.png)
+
+
+3. Click **"Save Stage"** to confirm
+
+**Example Configuration:**
+- Whitelist Price: 100 USDC
+- Duration: 2 days, 12 hours
+- Result: Whitelisted users can mint for 60 hours at the discounted price
+
+### Adding a Public Stage
+
+1. Click **"Add Public Mint Stage"**
+2. Configure the public minting parameters:
+   - **Mint Price (Public)**: Standard price for public users (e.g., 150 USDC)
+   - **Stage Duration - Days**: How long public minting remains open
+   - **Stage Duration - Hours**: Additional hours for timing precision
+
+![Whitelist stage modal](/img/docs/whitelist-mint/public_stage_modal.png)
+
+3. Click **"Save Stage"** to confirm
+
+**Timeline Example:**
+🕐 MINT START: January 1st, 12:00 PM
+
+WHITELIST PHASE (60 hours)
+January 1st 12:00 PM → January 3rd 12:00 PM
+- Only whitelisted wallets can mint
+- Price: 100 USDC
+- Duration: 60 hours
+
+PUBLIC PHASE (108 hours) 
+January 3rd 12:00 PM → January 8th 12:00 AM
+- Anyone can mint (including whitelisted users)
+- Price: 150 USDC  
+- Duration: 108 hours
+
+🏁 MINTING ENDS: January 8th, 12:00 AM
+
+## Option B: Whitelist-Only Setup
+
+When **Public Minting is disabled**, you'll see only one button:
+
+### Exclusive Whitelist Configuration
+
+1. **Toggle off "Public Minting"**
+2. Click **"Add Whitelist Stage"**
+3. Configure your exclusive whitelist parameters:
+   - **Mint Price (Whitelist)**: Price for whitelisted users only
+   - **Stage Duration**: How long the whitelist window remains open
+
+![Pulibc Minting Disabled](/img/docs/whitelist-mint/public_minting_disabled.png)
+
+**Result:** Only pre-approved wallets can mint, creating an exclusive drop.
+
+## Managing Your Whitelist
+
+### Adding Addresses to Whitelist
+*[This section would need to be added based on how the whitelist management actually works in your system]*
+
+{/* ### Verifying Whitelist Status
+Users can verify their whitelist status through:
+- Collection page indicators
+- Wallet connection status
+- Discord role verification */}
+
+## Troubleshooting
+
+### Common Issues
+
+**Whitelist Not Working**
+- Verify wallet addresses are correctly added to whitelist
+- Check that whitelist stage timing is configured correctly
+- Ensure users are connecting the correct wallet
+
+**Stage Timing Confusion**
+- Remember: Stages run sequentially, not simultaneously
+- Whitelist always runs first, then public (if enabled)
+- Total minting time = Whitelist duration + Public duration
+
+### Getting Help
+
+For whitelist minting support:
+- Join our [Discord community](https://discord.gg/CR8nKg5gYB) 
+- Contact our team for large collection launches
+{/* - Check the #creators channel for tips and examples */}
+---
+
+## Quick Reference
+
+| Feature | Whitelist Stage | Public Stage |
+|---------|----------------|--------------|
+| **Who Can Mint** | Pre-approved wallets only | Anyone |
+| **Pricing** | Custom whitelist price | Standard public price |
+| **Duration** | Days + Hours configuration | Days + Hours configuration |
+| **When It Runs** | First (immediately at mint start) | Second (after whitelist ends) |
+| **Required** | Optional but recommended | Optional (can be disabled) |
+
+**Need to set up your first whitelist drop?** Follow our complete [Collections Guide](/guides/collections) for the full creation process.
