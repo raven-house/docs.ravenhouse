@@ -4,7 +4,7 @@ This repository contains the official documentation for [Raven House](https://ra
 
 ## About Raven House
 
-Raven House is a next-generation NFT marketplace that leverages Aztec Network's zero-knowledge technology to provide enhanced privacy, lower fees, and improved user experience for creators and collectors.
+Raven House is a next-generation NFT infrastructure that leverages Aztec Network's zero-knowledge technology to provide enhanced privacy, lower fees, and improved user experience for creators and collectors.
 
 ## Documentation
 
@@ -75,4 +75,3 @@ For questions about the documentation or Raven House in general:
 
 - Discord: [Join our server](https://discord.gg/gCPZhWBYQH)
 - Twitter: [@ravenhousenft](https://twitter.com/ravenhousenft)
-
