@@ -38,13 +38,16 @@ Before adding specific stages, set your collection's overall minting parameters:
 
 ### Step 2: Choose Your Minting Strategy
 
-You have two main approaches:
+You have three main approaches:
 
 #### Option A: Whitelist + Public Minting 
 Perfect for building hype with early access while still allowing public participation.
 
 #### Option B: Whitelist-Only Minting
 Ideal for exclusive drops or limited community releases.
+
+#### Option C: Public-Only Minting (No Whitelist)
+Best for simple launches where you want immediate public access without any exclusivity.
 
 ## Option A: Whitelist + Public Minting Setup
 
@@ -113,6 +116,47 @@ When **Public Minting is disabled**, you'll see only one button:
 
 **Result:** Only pre-approved wallets can mint, creating an exclusive drop.
 
+## Option C: Public-Only Minting (No Whitelist)
+
+Want to skip the whitelist entirely and allow immediate public minting? Here's how:
+
+### Quick Public Launch Setup
+
+1. **Keep "Public Minting" enabled**
+2. Click **"Add Whitelist Stage"** 
+3. **Set whitelist duration to 0**:
+   - Days: `0`
+   - Hours: `0`
+4. Click **"Add Public Mint Stage"**
+5. Configure your public minting:
+   - **Mint Price (Public)**: Your standard mint price
+   - **Stage Duration**: How long you want public minting open
+
+### What Happens:
+
+```
+🕐 MINT START: January 1st, 12:00 PM
+
+ WHITELIST PHASE (0 hours) 
+- Skipped entirely (0 duration)
+
+
+ PUBLIC PHASE (starts immediately)
+January 1st 12:00 PM → Your configured end time
+- Anyone can mint immediately
+- No whitelist restrictions
+- Standard public pricing
+```
+
+**Perfect for:**
+- Simple, straightforward launches
+- Community drops without exclusivity
+- Collections where you want immediate public access
+
+### Pro Tip:
+Even with 0 whitelist duration, you still need to add both stages. Think of the whitelist stage as a "setup requirement" that you're just setting to skip.
+
+
 ## Managing Your Whitelist
 
 ### Adding Addresses to Whitelist
@@ -144,16 +188,18 @@ For whitelist minting support:
 - Join our [Discord community](https://discord.gg/CR8nKg5gYB) 
 - Contact our team for large collection launches
 {/* - Check the #creators channel for tips and examples */}
+
 ---
 
 ## Quick Reference
 
-| Feature | Whitelist Stage | Public Stage |
-|---------|----------------|--------------|
-| **Who Can Mint** | Pre-approved wallets only | Anyone |
-| **Pricing** | Custom whitelist price | Standard public price |
-| **Duration** | Days + Hours configuration | Days + Hours configuration |
-| **When It Runs** | First (immediately at mint start) | Second (after whitelist ends) |
-| **Required** | Optional but recommended | Optional (can be disabled) |
+| Feature | Whitelist Stage | Public Stage | Public-Only Setup |
+|---------|----------------|--------------|-------------------|
+| **Who Can Mint** | Pre-approved wallets only | Anyone | Anyone (immediate) |
+| **Pricing** | Custom whitelist price | Standard public price | Standard public price |
+| **Duration** | Days + Hours configuration | Days + Hours configuration | Days + Hours (public only) |
+| **When It Runs** | First (immediately at mint start) | Second (after whitelist ends) | Immediately (whitelist = 0) |
+| **Use Case** | Early access, community rewards | General public access | Simple public launches |
+| **Required** | Optional but recommended | Optional (can be disabled) | Whitelist stage set to 0 duration |
 
 **Need to set up your first whitelist drop?** Follow our complete [Collections Guide](/guides/collections) for the full creation process.
