@@ -21,6 +21,7 @@
     "items": {
       "collections": "Collections",
       "whitelist-minting": "Whitelist Minting",
+      "whitelist-management": "Whitelist Management",
       "nfts": "NFTs",
       "discord": "Discord Integration",
       "privacy": "Privacy Features"
