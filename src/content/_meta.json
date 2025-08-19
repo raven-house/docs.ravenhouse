@@ -19,7 +19,7 @@
     "title": "User Guides",
     "type": "menu",
     "items": {
-      "collections": "Collections",
+      "launch-nft-collection": "Launch NFT Collection",
       "whitelist-minting": "Whitelist Minting",
       "whitelist-management": "Whitelist Management",
       "nfts": "NFTs",
