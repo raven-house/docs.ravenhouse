@@ -4,8 +4,6 @@ This guide will walk you through process of launching NFT collection on the Azte
 
 Raven House provides the essential infrastructure for NFTs on the Aztec layer 2 blockchain. It leverages the power of zero-knowledge proofs and client-side proving to bring true privacy to your digital assets. With Raven House, you can mint, list, and transfer NFTs privately, and even prove you hold an NFT without ever revealing your wallet address.
 
-
-
 ## Video Guide
 
 Watch this comprehensive video tutorial that walks through the entire collection creation process:
@@ -53,17 +51,79 @@ Next, you'll define the traits that your NFTs can have. These traits are the pro
 
 ### 1.3 Economics & Supply
 
-Finally, set up the rules for minting your NFTs.
+Set up the basic economic rules for your collection:
 
-* Mint Price: The cost to mint one NFT (e.g., 1000 USDC).
+* Mint Price: The base cost to mint one NFT (e.g., 1000 USDC).
 * Royalty Fee: The percentage you'll earn from secondary sales.
 * Max Supply: The total number of NFTs that can ever be created. You can also check the box for an unlimited supply.
 * Mint Limit per Wallet: The maximum number of NFTs a single wallet can mint. You can also disable this limit.
-* Public Minting: Toggle this on to allow anyone to mint. If disabled, only wallets you've approved can mint.
-
-Once you've filled everything out, click "Create Collection".
 
 ![Economics & Supply](/img/docs/economics-form.png)
+
+### 1.4 Public Minting & Mint Stages
+
+Configure how your collection will be available for minting. This new feature gives you complete control over who can mint and when.
+
+#### Public Minting Toggle
+
+By default, the **Public Minting** toggle is enabled. This setting determines the minting access for your collection:
+
+* **When enabled**: Anyone can mint NFTs from your collection during public mint stages
+* **When disabled**: Only approved wallets can mint during whitelist stages
+
+![Public Minting Toggle](/img/docs/whitelist-mint/public-minting-toggle.png)
+
+#### Mint Stages Configuration
+
+Based on your Public Minting setting, you'll see different stage options:
+
+**If Public Minting is Disabled:**
+- You'll see only the **"Add Whitelist Stage"** button
+- This creates a whitelist-only collection where only approved users can mint
+
+![Whitelist Only Mode](/img/docs/whitelist-mint/whitelist-only-mode.png)
+
+**If Public Minting is Enabled:**
+- You'll see both **"Add Whitelist Stage"** and **"Add Public Mint Stage"** buttons
+- This allows you to create a collection with both whitelist and public phases
+
+![Public Minting Enabled](/img/docs/whitelist-mint/public-minting-enabled.png)
+
+#### Adding a Whitelist Stage
+
+Click **"Add Whitelist Stage"** to open the "Configure Whitelist Stage" modal:
+
+* **Mint Price (Whitelist)**: Set a special price for whitelisted users (often lower than public price)
+* **Mint Start Date & Time**: Choose the exact moment when whitelist minting begins
+* **Stage Duration**: Set how long the whitelist stage lasts (in days and hours)
+
+![Configure Whitelist Stage Modal](/img/docs/whitelist-mint/configure-whitelist-stage.png)
+
+> **Note**: After launching your collection, you'll need to add whitelist users and enable the whitelist. [Learn how to manage your whitelist →](/guides/whitelist-management)
+
+#### Adding a Public Mint Stage
+
+Click **"Add Public Mint Stage"** to open the "Configure Public Mint Stage" modal:
+
+* **Mint Price**: Set the public minting price
+* **Mint Start Date & Time**: Choose when public minting begins
+* **Stage Duration**: Set how long public minting lasts (in days and hours)
+
+![Configure Public Mint Stage Modal](/img/docs/whitelist-mint/configure-public-mint-stage.png)
+
+#### How Mint Stages Work
+
+* **Before Stage**: Minting is disabled
+* **During Stage**: Minting is active for the specified group (whitelist or public)
+* **After Stage**: Minting is disabled again
+
+You can create multiple stages to run sequentially, such as:
+1. Whitelist stage (Days 1-3)
+2. Public mint stage (Days 4-10)
+{/* //TODO: Currently this image is wrong, please fix this, we should clearly show date in which first whitelist will be enabled then after 3 days public */}
+![Mint Stages Overview](/img/docs/whitelist-mint/mint-stages-overview.png)
+
+Once you've configured all your settings and stages, click "Launch Collection".
 
 ---
 
@@ -79,8 +139,6 @@ Click to upload your prepared ZIP file. The platform will validate it to ensure 
 
 Once the upload is successful, you'll see a confirmation message. Your NFTs are now available in your collection, ready for minting once the collection is launched.
 
-{/* ![Upload Successful](Screenshot%202025-06-04%20at%201.40.51%E2%80%AFPM.jpg) */}
-
 ---
 
 ## Step 3: Launch Your Collection
@@ -93,6 +151,16 @@ You can choose to launch immediately or come back and do it later from your prof
 
 When you're ready, click "Launch Collection". A final confirmation pop-up will appear, summarizing your collection's details. Review everything carefully, as this action cannot be undone.
 
+## Managing Your Collection After Launch
+
+### Whitelist Management
+
+If you created whitelist stages, you'll need to:
+1. Add approved wallet addresses to your whitelist
+2. Enable the whitelist functionality
+3. Monitor and manage whitelist access
+
+[Complete Whitelist Management Guide →](/guides/whitelist-management)
 
 ## Troubleshooting
 
@@ -100,11 +168,21 @@ When you're ready, click "Launch Collection". A final confirmation pop-up will a
 
 - **Validation errors**: Ensure your ZIP file structure matches the requirements exactly
 - **Contract deployment fails**: Check your wallet connection and try again
-{/* - **Images not displaying**: Verify image formats are PNG and properly named */}
+- **Whitelist not working**: Verify whitelist is enabled and users are properly added
 
 ### Getting Help
 
 If you encounter issues:
 - Check our [Discord community](https://discord.gg/CR8nKg5gYB) for support
 - Review the [wallet connection guide](https://docs.ravenhouse.xyz/getting-started) if having wallet issues
-{/* - Contact our team through the platform for technical support */}
+- Contact our team through the platform for technical support
+
+## Best Practices for Mint Stages
+
+### Timing Considerations
+* Consider your target audience's time zones when setting start times
+* Plan buffer time for any technical issues
+
+---
+
+*Ready to create your collection? [Get started on Raven House →](https://app.ravenhouse.xyz/collection/create)*
