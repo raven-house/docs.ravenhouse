@@ -20,6 +20,7 @@
     "type": "menu",
     "items": {
       "launch-nft-collection": "Launch NFT Collection",
+      "launch-voucher-collection": "Launch Voucher Collection",
       "whitelist-minting": "Whitelist Minting",
       "whitelist-management": "Whitelist Management",
       "nfts": "NFTs",
