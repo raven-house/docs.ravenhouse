@@ -7,6 +7,10 @@
     "title": "Getting Started",
     "type": "page"
   },
+  "rewards-program": {
+    "title": "Raven Rewards Program",
+    "type": "page"
+  },
   "wallets": {
     "title": "Wallet Setup",
     "type": "menu",
