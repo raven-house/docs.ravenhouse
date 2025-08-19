@@ -66,10 +66,10 @@ Configure how your collection will be available for minting. This new feature gi
 
 #### Public Minting Toggle
 
-By default, the **Public Minting** toggle is enabled. This setting determines the minting access for your collection:
+By default, the **Public Minting** toggle is enabled. This setting controls whether you want to include public mint stages in your collection:
 
-* **When enabled**: Anyone can mint NFTs from your collection during public mint stages
-* **When disabled**: Only approved wallets can mint during whitelist stages
+* **When enabled**: You can create both whitelist stages and public mint stages (they can run simultaneously or separately)
+* **When disabled**: You can only create whitelist stages for your collection
 
 ![Public Minting Toggle](/img/docs/whitelist-mint/public-minting-toggle.png)
 
@@ -79,13 +79,13 @@ Based on your Public Minting setting, you'll see different stage options:
 
 **If Public Minting is Disabled:**
 - You'll see only the **"Add Whitelist Stage"** button
-- This creates a whitelist-only collection where only approved users can mint
+- This creates a whitelist-only collection where you can set up multiple whitelist stages with different timings and prices
 
 ![Whitelist Only Mode](/img/docs/whitelist-mint/whitelist-only-mode.png)
 
 **If Public Minting is Enabled:**
 - You'll see both **"Add Whitelist Stage"** and **"Add Public Mint Stage"** buttons
-- This allows you to create a collection with both whitelist and public phases
+- This allows you to create flexible minting strategies with any combination of whitelist and public stages
 
 ![Public Minting Enabled](/img/docs/whitelist-mint/public-minting-enabled.png)
 
@@ -99,7 +99,7 @@ Click **"Add Whitelist Stage"** to open the "Configure Whitelist Stage" modal:
 
 ![Configure Whitelist Stage Modal](/img/docs/whitelist-mint/configure-whitelist-stage.png)
 
-> **Note**: After launching your collection, you'll need to add whitelist users and enable the whitelist. [Learn how to manage your whitelist →](/guides/whitelist-management)
+> **Note**: After launching your collection, you'll need to add whitelist users and enable the whitelist. [Learn how to manage your whitelist →](link-to-whitelist-guide)
 
 #### Adding a Public Mint Stage
 
@@ -113,14 +113,21 @@ Click **"Add Public Mint Stage"** to open the "Configure Public Mint Stage" moda
 
 #### How Mint Stages Work
 
-* **Before Stage**: Minting is disabled
-* **During Stage**: Minting is active for the specified group (whitelist or public)
-* **After Stage**: Minting is disabled again
+Mint stages give you complete flexibility in how your collection is released:
 
-You can create multiple stages to run sequentially, such as:
-1. Whitelist stage (Days 1-3)
-2. Public mint stage (Days 4-10)
-{/* //TODO: Currently this image is wrong, please fix this, we should clearly show date in which first whitelist will be enabled then after 3 days public */}
+* **Independent Timing**: Each stage has its own start time and duration
+* **Overlapping Stages**: Whitelist and public stages can run simultaneously, allowing both groups to mint at the same time
+* **Different Pricing**: You can set different prices for whitelist and public stages, even when they overlap
+* **Sequential Stages**: You can also run stages one after another without overlap
+
+**Popular Strategies:**
+1. **Overlapping with Price Advantage**: Whitelist users get a lower price during the same period as public minting
+2. **Early Access**: Whitelist stage starts first, then public stage begins while whitelist is still active
+3. **Sequential Phases**: Whitelist stage (Days 1-3), then public stage (Days 4-10)
+4. **Simultaneous Launch**: Both whitelist and public stages start at the same time with different prices
+
+You can create multiple stages to implement any of these strategies:
+
 ![Mint Stages Overview](/img/docs/whitelist-mint/mint-stages-overview.png)
 
 Once you've configured all your settings and stages, click "Launch Collection".
