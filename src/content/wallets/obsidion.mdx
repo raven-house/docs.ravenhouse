@@ -1,136 +1,26 @@
-import { Video } from '../../components/video'
+# Setting up Obsidion Wallet
 
-# Setting Up Obsidion Wallet
+Obsidion is a web-based wallet designed for the Aztec Network, offering seamless integration with Raven House and access to the latest Aztec features.
 
-Obsidion is a web-based wallet designed specifically for the Aztec Network. It offers seamless integration with Raven House and stays up-to-date with the latest Aztec features.
+## Basics of Obsidion
 
-## Why Choose Obsidion?
+- **Web-Based Access**: Use Obsidion directly in your browser at [https://app.obsidion.xyz](https://app.obsidion.xyz) without installation.
+- **Secure Authentication**: Utilizes passkeys for enhanced security.
+- **Testnet Tokens**: Built-in faucet for easy access to testnet tokens.
+- **Developer Mode**: Optional mode for testing and development.
+- **Raven House Integration**: Connects easily with Raven House for NFT interactions.
 
-## Obsidion Wallet Walkthrough (Video)
-
-Watch this complete demo of the Obsidion wallet in action:
-
-<figure>
-  <Video src="/demo/wallet_demo.mp4" />
-</figure>
+To learn more about Obsidion and its features, visit the [official Obsidion documentation](https://docs.obsidion.xyz/intro).
 
 
-- **Always Current**: Web-based deployment means immediate access to Aztec updates
-- **No Installation**: Works directly in your browser
-- **Secure Authentication**: Uses passkeys for enhanced security
-- **Built-in Faucet**: Easy access to testnet tokens
-- **Developer Friendly**: Optional developer mode for testing
-
-## Step 1: Create Your Obsidion Account
-
-### Access the Application
-
-1. Navigate to [app.obsidion.xyz](https://app.obsidion.xyz)
-2. If this is your first visit, you'll see account creation options
-3. **Important**: Ignore the "Sign in with Google" prompt for now
-4. Click **"Create Account With Passkey"**
-
-### Account Creation Process
-
-The account creation will take a few minutes. **Do not close the window** during this process.
-
-Behind the scenes, Obsidion is:
-- Simulating the transaction
-- Generating the witness for the circuit
-- Proving the account creation in the PXE
-- Sending the transaction and waiting for it to be mined
-
-### Account Types
-
-**Standard Passkey Account**:
-- Uses passkey authentication for security
-- Requires passkey confirmation for transactions
-- Recommended for regular use
-
-**Developer Account** (Optional):
-- Check the "developer account" checkbox during creation
-- Creates a passkey-less account with no transaction signature validation
-- No passkey required for transactions
-- Suitable for devices that don't support passkeys
-- Ideal for development and testing
-
-### Successful Creation
-
-Once your account is created successfully, you'll see a confirmation modal. You're now ready to use your Obsidion account!
-
-## Step 2: Get Testnet Tokens
-
-### Claim Faucet Tokens
-{/* //TODO Improve this and add faucet token screenshot */}
-1. After account creation, look for the **"Claim faucet tokens"** button
-2. Click this button to start the faucet process
-3. **Note**: Sometimes the faucet may not work immediately - try again after a few minutes if needed
-
-You should receive approximately 3 ETH testnet tokens.
-
-### Convert Private Tokens to Public
-
-**Important**: Faucet tokens are received as private tokens by default. To use them on Raven House, you need to make them public.
-{/* TODO: Add multiple screenshots here to demonstrate what's going on */}
-1. Click the **"Send funds"** button in your Obsidion wallet
-2. A right sidebar will appear for sending funds
-3. Select **"Private to Public"** transfer type
-4. Paste your own wallet address as the recipient
-5. Enter the amount you want to convert
-6. Confirm the transaction
-
-Your tokens are now public and ready to use on Raven House!
-
-## Step 3: Connect to Raven House
-
-1. Visit [Raven House](https://app.ravenhouse.xyz)
-2. Click **"Connect Wallet"** in the top right corner
-3. Select **"Obsidion"** from the wallet options
-4. Complete the connection process
-5. Your wallet address will appear in the header once connected
-
-## Account Management
-
-### Email Registration (Optional)
-
-You can optionally add your email to Obsidion's Email Registry:
-
-1. Click "Sign in with Google" in the top right corner
-2. This enables sending funds to other users via email addresses
-3. Learn more in the [Obsidion documentation](https://docs.obsidion.xyz)
-
-### Security Tips
-
-- Consider using developer mode only for testing
-- Regular accounts provide better security for mainnet use
-
-## Troubleshooting
-
-### Account Creation Taking Too Long
-- Ensure stable internet connection
-- Don't close the browser window
-- Wait up to 10 minutes for completion
-
-### Faucet Not Working
-- Try again after 5-10 minutes
-- Check if you've already claimed recently
-- Verify you're on the correct testnet
-
-### Connection Issues with Raven House
-- Refresh both applications
-- Clear browser cache
-- Ensure you're on the same network in both apps
+## Next Steps
+- Visit [https://app.obsidion.xyz](https://app.obsidion.xyz) to create your account.
+- Explore the [Obsidion Documentation](https://docs.obsidion.xyz/intro) for detailed guides on account creation, token management, and connecting to Raven House.
+- [Create your first NFT collection](/guides/launch-nft-collection)
+- [Learn about privacy features](/guides/privacy)
 
 ## Resources
 - [Ask Questions to the Obsidion Team on Signal](https://signal.group/#CjQKIDBmFVuI9gz2cRZaa3HD4-tJpGc8PrWQ9aec_AomvJRjEhDEHAiu0G6zkaF9xf9Q3ufI)
 - [Official Obsidion Documentation](https://docs.obsidion.xyz/intro)
 - [Creating Account Guide](https://docs.obsidion.xyz/getting-started/creating-account)
 - [Raven House Discord Support](https://discord.com/invite/gCPZhWBYQH)
-
-## Next Steps
-
-With your Obsidion wallet set up:
-
-- [Return to Getting Started](/getting-started) to connect to Raven House
-- [Create your first NFT collection](/guides/launch-nft-collection)
-- [Learn about privacy features](/guides/privacy)
