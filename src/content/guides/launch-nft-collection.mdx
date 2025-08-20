@@ -1,194 +1,201 @@
 ---
-title: Launch NFT Collection
-description: How to Launch a NFT Collection
+title: Launch an NFT Collection
+description: A step-by-step guide to launching your NFT collection on Raven House with privacy-first features on the Aztec Layer 2 blockchain.
 ---
 
-# How to Launch a NFT Collection
+# Launch an NFT Collection
 
-This guide will walk you through process of launching NFT collection on the Aztec network with Raven House.
+Launch your NFT collection on Raven House, a privacy-first platform on the Aztec Layer 2 blockchain (live on testnet). Using zero-knowledge proofs, mint, list, and transfer NFTs privately, keeping your wallet and NFT details confidential.
 
-Raven House provides the essential infrastructure for NFTs on the Aztec layer 2 blockchain. It leverages the power of zero-knowledge proofs and client-side proving to bring true privacy to your digital assets. With Raven House, you can mint, list, and transfer NFTs privately, and even prove you hold an NFT without ever revealing your wallet address.
+This guide walks you through launching a collection, from defining its details to deploying it on Aztec. Let’s bring your vision to life!
 
 ## Video Guide
 
-Watch this comprehensive video tutorial that walks through the entire collection creation process:
+Watch our step-by-step video tutorial to see the launch process in action:
 
-<iframe 
-  width="100%" 
-  height="400" 
-  src="https://www.youtube.com/embed/TGUKf2CTQSM" 
-  title="How to Create and Launch an NFT Collection on Raven House" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/TGUKf2CTQSM"
+  title="Launch Your NFT Collection on Raven House"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
 
-*This video covers the complete process from collection creation to launch, including tips and best practices.*
+_This video covers everything from setup to deployment, with tips for a successful launch._
 
-Before we begin, you'll need an Aztec-compatible wallet. If you haven't set one up yet, please follow [this guide](/guides/get-started#wallet-guide) to set up your wallet.
+> [!NOTE]
+>
+> **Before You Start**: Ensure you have an Aztec-compatible wallet like **Azguard** or **Obsidion**. Follow our [Wallet Setup Guide](/guides/get-started#wallet-guide) to get started.
 
-## Step 1: Create Your Collection
+---
 
-The first step is to define the core details, traits, and economics of your collection.
+## Step 1: Set Up Your Collection
 
-### 1.1 Collection Details
+Begin by defining your collection’s identity, traits, economics, and minting strategy on the Raven House platform.
 
-Navigate to the "Create Collection" page. Here, you'll fill out the foundational information for your NFT project.
+### 1.1 Define Your Collection
 
-* Collection Name: The public name of your collection (e.g., "Aztec Alpha Builders").
-* Collection Symbol: A short ticker for your collection (e.g., "ALPHABUILDERS"). This will be used in the contract and cannot be changed.
-* Collection Image: This is the main profile picture or logo for your collection. A resolution of 800x800px is recommended.
-* Banner Image: A header image for your collection page. A resolution of 1400x400px is recommended.
-* Description: A detailed description of your collection's purpose and vision.
+Navigate to the **Launch Collection** page on Raven House. Enter the core details to establish your collection’s identity.
 
-![Collection Details](/img/docs/collection-details.png)
+**Example: Moonlit Guardians Collection**
 
-### 1.2 Define Traits
+- **Collection Name**: Moonlit Guardians
+- **Collection Symbol**: MOON (used in the smart contract; cannot be changed)
+- **Collection Image**: A 800x800px PNG of a glowing wolf emblem
+- **Banner Image**: A 1400x400px PNG of a mystical forest under moonlight
+- **Description**: “Moonlit Guardians is a collection of 1,000 unique NFTs celebrating mythical creatures protecting ancient forests. Each NFT grants access to exclusive community events and lore-driven quests.”
 
-Next, you'll define the traits that your NFTs can have. These traits are the properties that make each NFT unique and will be used when you mint them. You can define the trait's name (Trait Key), its data type (Text, Yes/No, Number), and a brief description.
+![Define Collection](/img/docs/collection-details.png)
 
-![Define Traits](/img/docs/trait-definition.png)
+> [!TIP]
+>
+> Use high-quality images and a compelling description to attract collectors.
 
-### 1.3 Economics & Supply
+### 1.2 Configure NFT Traits
 
-Set up the basic economic rules for your collection:
+Define the traits that make each NFT unique. Traits are attributes like color, rarity, or type, which you’ll assign during asset upload.
 
-* Mint Price: The base cost to mint one NFT (e.g., 1000 USDC).
-* Royalty Fee: The percentage you'll earn from secondary sales.
-* Max Supply: The total number of NFTs that can ever be created. You can also check the box for an unlimited supply.
-* Mint Limit per Wallet: The maximum number of NFTs a single wallet can mint. You can also disable this limit.
+**Example Traits for Moonlit Guardians**:
+
+- **Trait Key**: Guardian Type
+  - **Data Type**: Text
+  - **Description**: Type of mythical creature (e.g., Wolf, Owl, Dragon)
+- **Trait Key**: Rarity Tier
+  - **Data Type**: Text
+  - **Description**: Rarity level (e.g., Common, Rare, Legendary)
+- **Trait Key**: Magic Affinity
+  - **Data Type**: Yes/No
+  - **Description**: Indicates if the guardian has magical powers
+
+![Configure Traits](/img/docs/trait-definition.png)
+
+### 1.3 Set Economics and Supply
+
+Configure the financial and supply rules for your collection.
+
+**Example Settings for Moonlit Guardians**:
+
+- **Mint Price**: 10 USDC per NFT
+- **Royalty Fee**: 0 (will be supported in future versions)
+- **Max Supply**: 1,000 NFTs (fixed supply for exclusivity)
+- **Mint Limit per Wallet**: 5 NFTs to prevent oversaturation by single wallets
 
 ![Economics & Supply](/img/docs/economics-form.png)
 
-### 1.4 Public Minting & Mint Stages
+> [!TIP]
+>
+> Balance mint price and supply to align with your project’s goals and target audience.
 
-Configure how your collection will be available for minting. This new feature gives you complete control over who can mint and when.
+### 1.4 Plan Minting Stages
 
-#### Public Minting Toggle
+Control who can mint your NFTs and when by setting up public and whitelisted minting stages.
 
-By default, the **Public Minting** toggle is enabled. This setting controls whether you want to include public mint stages in your collection:
+#### Enable Public Minting
 
-* **When enabled**: You can create both whitelist stages and public mint stages (they can run simultaneously or separately)
-* **When disabled**: You can only create whitelist stages for your collection
+- **Toggle On**: Allows both public and whitelisted minting stages (flexible strategies).
+- **Toggle Off**: Restricts minting to whitelisted addresses only.
 
 ![Public Minting Toggle](/img/docs/whitelist-mint/public-minting-toggle.png)
 
-#### Mint Stages Configuration
+#### Add Whitelist Stages
 
-Based on your Public Minting setting, you'll see different stage options:
+Click **Add Whitelist Stage** to configure:
 
-**If Public Minting is Disabled:**
-- You'll see only the **"Add Whitelist Stage"** button
-- This creates a whitelist-only collection where you can set up multiple whitelist stages with different timings and prices
+- **Mint Price**: 1 USDC (discount for whitelisted users)
+- **Start Date & Time**: Aug 25, 2025, 12:00 PM UTC
+- **Duration**: 3 days
+- **Example**: Early supporters of Moonlit Guardians get a discounted mint price.
 
-![Whitelist Only Mode](/img/docs/whitelist-mint/whitelist-only-mode.png)
+![Whitelist Stage](/img/docs/whitelist-mint/configure-whitelist-stage.png)
 
-**If Public Minting is Enabled:**
-- You'll see both **"Add Whitelist Stage"** and **"Add Public Mint Stage"** buttons
-- This allows you to create flexible minting strategies with any combination of whitelist and public stages
+#### Add Public Mint Stages
 
-![Public Minting Enabled](/img/docs/whitelist-mint/public-minting-enabled.png)
+Click **Add Public Mint Stage** to configure:
 
-#### Adding a Whitelist Stage
+- **Mint Price**: 10 USDC
+- **Start Date & Time**: Aug 28, 2025, 12:00 PM UTC
+- **Duration**: 7 days
+- **Example**: General collectors can mint Moonlit Guardians after the whitelist phase.
 
-Click **"Add Whitelist Stage"** to open the "Configure Whitelist Stage" modal:
+![Public Mint Stage](/img/docs/whitelist-mint/configure-public-mint-stage.png)
 
-* **Mint Price (Whitelist)**: Set a special price for whitelisted users (often lower than public price)
-* **Mint Start Date & Time**: Choose the exact moment when whitelist minting begins
-* **Stage Duration**: Set how long the whitelist stage lasts (in days and hours)
+#### Minting Strategies
 
-![Configure Whitelist Stage Modal](/img/docs/whitelist-mint/configure-whitelist-stage.png)
-
-> **Note**: After launching your collection, you'll need to add whitelist users and enable the whitelist. [Learn how to manage your whitelist →](/guides/whitelist-management)
-
-#### Adding a Public Mint Stage
-
-Click **"Add Public Mint Stage"** to open the "Configure Public Mint Stage" modal:
-
-* **Mint Price**: Set the public minting price
-* **Mint Start Date & Time**: Choose when public minting begins
-* **Stage Duration**: Set how long public minting lasts (in days and hours)
-
-![Configure Public Mint Stage Modal](/img/docs/whitelist-mint/configure-public-mint-stage.png)
-
-#### How Mint Stages Work
-
-Mint stages give you complete flexibility in how your collection is released:
-
-* **Independent Timing**: Each stage has its own start time and duration
-* **Overlapping Stages**: Whitelist and public stages can run simultaneously, allowing both groups to mint at the same time
-* **Different Pricing**: You can set different prices for whitelist and public stages, even when they overlap
-* **Sequential Stages**: You can also run stages one after another without overlap
-
-**Popular Strategies:**
-1. **Overlapping with Price Advantage**: Whitelist users get a lower price during the same period as public minting
-2. **Early Access**: Whitelist stage starts first, then public stage begins while whitelist is still active
-3. **Sequential Phases**: Whitelist stage (Days 1-3), then public stage (Days 4-10)
-4. **Simultaneous Launch**: Both whitelist and public stages start at the same time with different prices
-
-You can create multiple stages to implement any of these strategies:
+- **Early Access**: Whitelist stage (Aug 25–27) followed by public stage (Aug 28– Sept 3).
+- **Price Advantage**: Whitelist at 1 USDC, public at 10 USDC, running concurrently.
+- **Sequential Phases**: Whitelist only (Days 1–3), then public only (Days 4–10).
 
 ![Mint Stages Overview](/img/docs/whitelist-mint/mint-stages-overview.png)
 
-Once you've configured all your settings and stages, click "Launch Collection".
+> [!TIP]
+>
+> Schedule stages to align with your community’s time zones and marketing campaigns. Learn more about [Whitelist Management](/guides/whitelist-management).
 
 ---
 
-## Step 2: Upload Your NFTs
+## Step 2: Upload Assets
 
-With your collection created, it's time to upload your NFT assets and metadata. This step links your artwork and traits to the collection.
+Upload your NFT images and metadata to bring your collection to life.
 
-You will need to prepare a ZIP file containing your PNG image files and a metadata.json file. The platform provides a clear structure for the JSON file and a template ZIP for you to download.
+1. **Prepare Your Assets**:
 
-![Upload NFTs](/img/docs/upload-nfts.png)
+   - Create a ZIP file containing:
+     - PNG images for each NFT (e.g., `1.png`, `2.png` for Moonlit Guardians’ wolf and owl designs).
+     - A `metadata.json` file mapping each NFT to its traits (e.g., `{ "1": { "Guardian Type": "Wolf", "Rarity Tier": "Rare", "Magic Affinity": true } }`).
+   - Download our [Sample ZIP Template](#) for the correct structure.
 
-Click to upload your prepared ZIP file. The platform will validate it to ensure it matches the traits you defined in Step 1.
+2. **Upload the ZIP**:
 
-Once the upload is successful, you'll see a confirmation message. Your NFTs are now available in your collection, ready for minting once the collection is launched.
+   - On the **Launch Collection** page, click to upload your ZIP file.
+   - Raven House validates the file to ensure traits match your Step 1 definitions.
 
----
+3. **Confirm Upload**:
+   - Once validated, you’ll see a success message. Your NFTs are now linked to your collection, ready for minting.
 
-## Step 3: Launch Your Collection
+![Upload Assets](/img/docs/upload-nfts.png)
 
-This is the final step! Launching deploys your collection's smart contract to the Aztec network, making it live and ready for minting and trading.
-
-You can choose to launch immediately or come back and do it later from your profile page.
-
-![Launch Collection](/img/docs/launch-collection.png)
-
-When you're ready, click "Launch Collection". A final confirmation pop-up will appear, summarizing your collection's details. Review everything carefully, as this action cannot be undone.
-
-## Managing Your Collection After Launch
-
-### Whitelist Management
-
-If you created whitelist stages, you'll need to:
-1. Add approved wallet addresses to your whitelist
-2. Enable the whitelist functionality
-3. Monitor and manage whitelist access
-
-[Complete Whitelist Management Guide →](/guides/whitelist-management)
-
-## Troubleshooting
-
-### Common Issues
-
-- **Validation errors**: Ensure your ZIP file structure matches the requirements exactly
-- **Contract deployment fails**: Check your wallet connection and try again
-- **Whitelist not working**: Verify whitelist is enabled and users are properly added
-
-### Getting Help
-
-If you encounter issues:
-- Check our [Discord community](https://discord.gg/CR8nKg5gYB) for support
-- Review the [wallet connection guide](/guides/get-started) if having wallet issues
-- Contact our team through the platform for technical support
-
-## Best Practices for Mint Stages
-
-### Timing Considerations
-* Consider your target audience's time zones when setting start times
-* Plan buffer time for any technical issues
+**Tip**: Test your ZIP file with a small batch (e.g., 10 NFTs) to catch errors before uploading the full collection.
 
 ---
 
-*Ready to create your collection? [Get started on Raven House →](https://app.ravenhouse.xyz/collection/create)*
+## Step 3: Deploy and Manage
+
+Deploy your collection to the Aztec testnet and manage it post-launch.
+
+### 3.1 Deploy Your Collection
+
+- On the **Launch Collection** page, review your settings (name, traits, economics, stages).
+- Click **Deploy Collection** to deploy the smart contract to Aztec.
+- A confirmation pop-up summarizes your settings. Double-check, as deployment is irreversible.
+
+![Deploy Collection](/img/docs/launch-collection.png)
+
+**Tip**: Ensure your Azguard or Obsidion wallet is connected and funded with testnet tokens.
+
+### 3.2 Manage Post-Launch
+
+- **Whitelist Management**: Add wallet addresses and enable the whitelist for your stages. See [Whitelist Management Guide](/guides/whitelist-management).
+- **Monitor Minting**: Track mint progress and adjust stages if needed.
+- **Engage Community**: Use Raven House’s Discord bot to assign roles to NFT holders and share trading updates.
+
+---
+
+## Tips for Success
+
+### Planning Your Launch
+
+- **Time Zones**: Schedule mint stages for your audience’s primary time zones (e.g., UTC for global reach).
+- **Marketing**: Announce your Moonlit Guardians launch on Discord and X to build hype.
+- **Buffer Time**: Allow a 1–2 day buffer for technical issues during minting.
+
+### Troubleshooting
+
+- **ZIP Validation Errors**: Verify your `metadata.json` matches the trait structure defined in Step 1.
+- **Deployment Fails**: Check wallet connection and testnet token balance in Azguard/Obsidion.
+- **Whitelist Issues**: Ensure whitelist is enabled and addresses are correctly added.
+- **Need Help?** Join our [Discord community](https://discord.gg/CR8nKg5gYB) or contact support via the Raven House platform.
+
+---
+
+_Ready to launch your collection? [Start on Raven House →](https://app.ravenhouse.xyz/collection/launch)_
