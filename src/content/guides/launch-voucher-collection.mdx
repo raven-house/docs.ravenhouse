@@ -1,252 +1,197 @@
 ---
-title: Launch Voucher Collection
-description: How to Launch a Voucher Collection
+title: Launch a Voucher Collection
+description: A step-by-step guide to launching your USDC voucher collection on Raven House with privacy-first features on the Aztec Layer 2 blockchain.
 ---
 
-# How to Launch a Voucher Collection
+# Launch a Voucher Collection
 
-This guide will walk you through the process of launching a voucher collection on the Aztec network with Raven House.
+Launch your USDC voucher collection on **Raven House**, a privacy-first platform on the **Aztec Layer 2 blockchain** (live on testnet). Using zero-knowledge proofs, Raven House enables private minting and claiming of vouchers, keeping wallet addresses and voucher details confidential.
 
-Raven House provides the essential infrastructure for vouchers on the Aztec layer 2 blockchain. It leverages the power of zero-knowledge proofs and client-side proving to bring true privacy to your digital vouchers.
+This guide walks you through launching a voucher collection for airdrops, events, or rewards, from setup to funding.
 
-### Prerequisites
+## Video Guide
 
-Before we begin, you'll need an Aztec-compatible wallet. If you haven't set one up yet, please follow this guide to set up your wallet.
+Watch our concise video tutorial to see the launch process in action:
 
-👉 Setup your Wallet: [https://docs.ravenhouse.xyz/wallets/obsidion](https://docs.ravenhouse.xyz/wallets/obsidion)
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/TGUKf2CTQSM"
+  title="Launch Your Voucher Collection on Raven House"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
 
-Ready? Let's get started!
+> [!TIP]
+>
+> Follow the video for quick tips on optimizing your voucher collection setup.
 
-## Step 1: Create Your Voucher Collection
+**Before You Start**: Set up an Aztec-compatible wallet like **Azguard** or **Obsidion**. See our [Wallet Setup Guide](/guides/get-started#wallet-guide).
 
-The first step is to define the core details and economics of your voucher collection.
+---
 
-### 1.1 Voucher Collection Details
+## Step 1: Set Up Your Collection
 
-Navigate to the [Create Collection](https://app.ravenhouse.xyz/collection/create) page and select the "Voucher Collection" tab. Here, you'll fill out the foundational information for your voucher project. 
+Define your voucher collection’s identity, economics, and minting strategy on the Raven House platform.
 
-* **Collection Name**: The public name of your voucher collection (e.g., "Testnet Edition").
-* **Voucher Amount**: The monetary value that users will receive when they claim this voucher (e.g., 10 USDC). This is the core value proposition of your voucher collection.
-* **Description**: A detailed description of your voucher collection's purpose and what users can redeem it for.
+### 1.1 Define Your Collection
 
-![Voucher Collection Details](/img/docs/voucher-collection/voucher-collection-details.png)
+Navigate to the **Launch Collection** page and select the **Voucher Collection** tab. Enter the core details.
+
+**Example: Starlight Rewards Collection**
+
+- **Collection Name**: Starlight Rewards
+- **Voucher Amount**: 50 USDC per voucher (redeemable value)
+- **Description**: “Starlight Rewards offers 2,000 USDC vouchers for exclusive event access and community rewards, redeemable privately on Aztec.”
+
+![Define Collection](/img/docs/voucher-collection/voucher-collection-details.png)
+
+> [!TIP]
+>
+> Use a clear, compelling description to highlight your voucher’s purpose and value.
 
 ### 1.2 Choose Voucher Background
 
-Instead of uploading collection and banner images like standard NFT collections, voucher collections use a voucher background template. This background will be used as the visual base for all vouchers in your collection.
+Select or upload a background image for your vouchers to reflect your brand.
 
-You have two options:
+- **Option 1: Pre-Designed Templates**  
+  Choose from Raven House’s professional voucher templates.  
+  ![Voucher Templates](/img/docs/voucher-collection/voucher-background-templates.png)
 
-#### Option 1: Choose from Templates
-Select from pre-designed voucher backgrounds that follow the Raven House aesthetic:
+- **Option 2: Custom Background**  
+  Upload a PNG with:
+  - **Recommended Dimensions**: 334 × 207 pixels
+  - **Alternative**: Multiples (e.g., 668 × 414) with the same aspect ratio  
+    ![Custom Background](/img/docs/voucher-collection/upload-custom-voucher-background.png)
 
-![Choose Voucher Background Templates](/img/docs/voucher-collection/voucher-background-templates.png)
+### 1.3 Set Economics and Supply
 
-#### Option 2: Upload Custom Background
-Upload your own custom voucher background with the recommended dimensions:
+Configure the financial and supply rules.
 
-* **Recommended Dimensions**: 334 × 207 pixels
-* **Alternative Dimensions**: You can use multiples of the base template (e.g., 668 × 414, 1002 × 621, etc.)
-* **File Format**: PNG recommended for best quality
+**Example Settings for Starlight Rewards**:
 
-![Upload Custom Voucher Background](/img/docs/voucher-collection/upload-custom-voucher-background.png)
+- **Mint Price**: 0 USDC (free for airdrops)
+- **Max Supply**: 2,000 vouchers (fixed for exclusivity)
+- **Mint Limit per Wallet**: 3 vouchers to ensure fair distribution
 
-> **Design Tip**: For best results, use images with 334 × 207 pixel dimensions. The platform supports larger dimensions as long as they maintain the same aspect ratio (n × 334 by n × 207).
+![Economics & Supply](/img/docs/voucher-collection/voucher-economics-form.png)
 
-### 1.3 Economics & Supply
+> [!TIP]
+>
+> Set a low or zero mint price for promotional vouchers to boost adoption.
 
-Set up the basic economic rules for your voucher collection:
+### 1.4 Plan Minting Stages
 
-* **Mint Price**: The cost to mint one voucher (e.g., 0 USDC for free mints).
-* **Royalty Fee**: The percentage you'll earn from secondary sales of vouchers.
-* **Max Supply**: The total number of vouchers that can ever be created. You can also check the box for an unlimited supply.
-* **Mint Limit per Wallet**: The maximum number of vouchers a single wallet can mint. You can also disable this limit.
+Control who can mint vouchers and when.
 
-![Voucher Economics & Supply](/img/docs/voucher-collection/voucher-economics-form.png)
+#### Enable Public Minting
 
-### 1.4 Public Minting & Mint Stages
-
-Configure how your voucher collection will be available for minting. This feature gives you complete control over who can mint vouchers and when.
-
-#### Public Minting Toggle
-
-By default, the **Public Minting** toggle is enabled. This setting controls whether you want to include public mint stages in your voucher collection:
-
-* **When enabled**: You can create both whitelist stages and public mint stages (they can run simultaneously or separately)
-* **When disabled**: You can only create whitelist stages for your voucher collection
+- **Toggle On**: Allows public and whitelisted minting stages.
+- **Toggle Off**: Restricts to whitelisted addresses only.
 
 ![Public Minting Toggle](/img/docs/whitelist-mint/public-minting-toggle.png)
 
-#### Mint Stages Configuration
+#### Add Whitelist Stages
 
-Based on your Public Minting setting, you'll see different stage options:
+Click **Add Whitelist Stage**:
 
-**If Public Minting is Disabled:**
-- You'll see only the **"Add Whitelist Stage"** button
-- This creates a whitelist-only voucher collection where you can set up multiple whitelist stages with different timings and prices
+- **Mint Price**: 0 USDC (free for community members)
+- **Start Date & Time**: Sept 1, 2025, 10:00 AM UTC
+- **Duration**: 2 days
+- **Example**: Starlight Rewards whitelist for early supporters.
 
-![Whitelist Only Mode](/img/docs/whitelist-mint/whitelist-only-mode.png)
+![Whitelist Stage](/img/docs/whitelist-mint/configure-whitelist-stage.png)
 
-**If Public Minting is Enabled:**
-- You'll see both **"Add Whitelist Stage"** and **"Add Public Mint Stage"** buttons
-- This allows you to create flexible minting strategies with any combination of whitelist and public stages
+#### Add Public Mint Stages
 
-![Public Minting Enabled](/img/docs/whitelist-mint/public-minting-enabled.png)
+Click **Add Public Mint Stage**:
 
-#### Adding a Whitelist Stage
+- **Mint Price**: 5 USDC (small fee for public)
+- **Start Date & Time**: Sept 3, 2025, 10:00 AM UTC
+- **Duration**: 5 days
+- **Example**: Open minting for Starlight Rewards after whitelist phase.
 
-Click **"Add Whitelist Stage"** to open the "Configure Whitelist Stage" modal:
+![Public Mint Stage](/img/docs/whitelist-mint/configure-public-mint-stage.png)
 
-* **Mint Price (Whitelist)**: Set a special price for whitelisted users (often lower than public price)
-* **Mint Start Date & Time**: Choose the exact moment when whitelist minting begins
-* **Stage Duration**: Set how long the whitelist stage lasts (in days and hours)
+#### Minting Strategies
 
-![Configure Whitelist Stage Modal](/img/docs/whitelist-mint/configure-whitelist-stage.png)
-
-> **Note**: After launching your voucher collection, you'll need to add whitelist users and enable the whitelist. [Learn how to manage your whitelist →](/guides/whitelist-management)
-
-#### Adding a Public Mint Stage
-
-Click **"Add Public Mint Stage"** to open the "Configure Public Mint Stage" modal:
-
-* **Mint Price**: Set the public minting price
-* **Mint Start Date & Time**: Choose when public minting begins
-* **Stage Duration**: Set how long public minting lasts (in days and hours)
-
-![Configure Public Mint Stage Modal](/img/docs/whitelist-mint/configure-public-mint-stage.png)
-
-#### How Mint Stages Work
-
-Mint stages give you complete flexibility in how your voucher collection is released:
-
-* **Independent Timing**: Each stage has its own start time and duration
-* **Overlapping Stages**: Whitelist and public stages can run simultaneously, allowing both groups to mint at the same time
-* **Different Pricing**: You can set different prices for whitelist and public stages, even when they overlap
-* **Sequential Stages**: You can also run stages one after another without overlap
-
+- **Early Access**: Whitelist (Sept 1–2), then public (Sept 3–7).
+- **Free Airdrop**: Whitelist at 0 USDC, public at 5 USDC, running concurrently.
+- **Sequential Phases**: Whitelist only (Days 1–2), then public only (Days 3–7).
 
 ![Mint Stages Overview](/img/docs/whitelist-mint/mint-stages-overview.png)
 
-Once you've configured all your settings and stages, click "Launch Collection".
+> [!NOTE]
+>
+> After setup, manage whitelist addresses. See [Whitelist Management Guide](/guides/whitelist-management).
 
 ---
 
-## Step 2: Launch Your Voucher Collection
+## Step 2: Deploy Collection
 
-Unlike standard NFT collections that require uploading assets, voucher collections can be launched immediately after configuration. This step deploys your voucher collection's smart contract to the Aztec network, making it live and ready for minting and claiming.
+Deploy your voucher collection to the Aztec testnet, making it ready for minting and claiming.
 
-You can choose to launch immediately or come back and do it later from your profile page.
+1. **Review Settings**:
+   - Confirm name, voucher amount (50 USDC), supply (2,000), and stages.
+2. **Deploy**:
+   - Click **Deploy Collection** on the **Launch Collection** page.
+   - Review the confirmation pop-up, as deployment is irreversible.
 
-![Launch Voucher Collection](/img/docs/voucher-collection/launch-voucher-collection.png)
+![Deploy Collection](/img/docs/voucher-collection/launch-voucher-collection.png)
 
-When you're ready, click "Launch Collection". A final confirmation pop-up will appear, summarizing your voucher collection's details. Review everything carefully, as this action cannot be undone.
-
-**Key Launch Details to Review:**
-- Collection name and symbol
-- Voucher amount (the claimable value)
-- Total max supply
-
----
-
-## Step 3: Fund Your Voucher Collection
-
-This is the crucial final step! After launching your voucher collection, you need to fund it so users can actually claim the voucher value you promised.
-
-### 3.1 Understanding Voucher Funding
-
-When users mint vouchers from your collection, they receive vouchers worth the amount you specified (e.g., 10 USDC). However, for users to actually claim this value, your collection needs to be funded with the corresponding amount.
-
-### 3.2 Fund Your Collection
-
-Navigate to the funding page for your voucher collection:
-
-![Fund Voucher Collection](/img/docs/voucher-collection/fund-voucher-collection.png)
-
-Here you'll see:
-
-* **Collection Details**: Overview of your voucher collection including name, contract address, voucher amount, and max supply
-* **Total Funding Needed**: The maximum amount needed if all vouchers are minted and claimed (Voucher Amount × Max Supply)
-* **Funding Amount**: Choose how much to fund initially
-
-### 3.3 Funding Strategies
-
-You don't need to fund the entire collection at once. Consider these strategies:
-
-* **Partial Funding**: Fund 25%, 50%, or 75% initially and add more funds as needed
-* **Full Funding**: Fund the entire collection upfront for complete security
-* **Progressive Funding**: Start with a smaller amount and increase funding as minting activity grows
-
-![Funding Options](/img/docs/voucher-collection/voucher-funding-options.png)
-
-> **Important**: Users can only claim vouchers while funds are available in the collection. If funds run out, claiming will be temporarily disabled until you add more funds.
-
-Click **"Fund Collection"** to complete the process. Your voucher collection is now fully operational!
+> [!TIP]
+>
+> Ensure your Azguard or Obsidion wallet is connected with testnet tokens.
 
 ---
 
-## Managing Your Voucher Collection After Launch
+## Step 3: Fund and Manage
 
-### Monitoring Fund Levels
+Fund your collection to enable private voucher claims and manage it post-launch.
 
-Keep track of your collection's funding status:
-- Check remaining funds regularly
-- Monitor claiming activity
-- Add funds proactively to ensure uninterrupted claiming
+### 3.1 Fund Your Collection
 
-### Whitelist Management
+Navigate to the funding page to deposit USDC for claims.
 
-If you created whitelist stages, you'll need to:
-1. Add approved wallet addresses to your whitelist
-2. Enable the whitelist functionality
-3. Monitor and manage whitelist access
+- **Total Funding Needed**: 100,000 USDC (50 USDC × 2,000 vouchers)
+- **Funding Options**:
+  - **Partial**: Fund 25% (25,000 USDC) initially, add more as needed.
+  - **Full**: Fund 100% upfront for seamless claiming.
+  - **Progressive**: Start with 10,000 USDC, increase based on minting activity.
 
-[Complete Whitelist Management Guide →](/guides/whitelist-management)
+![Fund Collection](/img/docs/voucher-collection/fund-voucher-collection.png)
 
-{/* TODO: Improve below section before uncommenting it */}
-{/* ### Voucher Claiming Process
+> [!NOTE]
+> Users can only claim vouchers while funds are available. Top up as needed.
 
-Users who mint vouchers can claim their value by:
-1. Holding the voucher in their wallet
-2. Navigating to the claim interface
-3. Redeeming the voucher for the specified USDC amount
-4. Receiving funds privately through Aztec's zero-knowledge infrastructure */}
+### 3.2 Manage Post-Launch
 
-## Troubleshooting
+- **Monitor Funds**: Track remaining funds and claiming activity.
+- **Whitelist Management**: Add addresses and enable whitelist. See [Whitelist Management Guide](/guides/whitelist-management).
+- **Engage Community**: Use Raven House’s Discord bot to notify users of voucher activity.
 
-### Common Issues
+---
 
-- **Contract deployment fails**: Check your wallet connection and try again
-- **Funding transaction fails**: Ensure you have sufficient balance and try again
-- **Whitelist not working**: Verify whitelist is enabled and users are properly added
-- **Users can't claim**: Check if collection has sufficient funds
+## Tips for Success
 
-### Getting Help
+### Planning Your Launch
 
-If you encounter issues:
-- Check our [Discord community](https://discord.gg/CR8nKg5gYB) for support
-- Review the [wallet connection guide](/guides/get-started) if having wallet issues
-- Contact our team through the platform for technical support
-
-## Best Practices for Voucher Collections
-
-{/* ### Funding Strategy
-* Start with at least 50% funding to build user confidence
-* Monitor claiming patterns and fund accordingly
-* Consider the redemption timeline when planning funding */}
+- **Time Zones**: Schedule mint stages for your audience’s time zones (e.g., UTC for global access).
+- **Marketing**: Promote Starlight Rewards on Discord and X to drive engagement.
+- **Buffer Time**: Allow 1–2 days for funding transaction confirmations.
 
 ### Voucher Design
-* Use clear, professional voucher backgrounds
-* Ensure the voucher amount is prominently displayed
-* Consider your brand colors and style
 
-### Timing Considerations
-* Consider your target audience's time zones when setting start times
-* Plan buffer time for funding transactions
+- Use predesigned backgrounds created by Raven House team.
+- Test templates with a small batch to ensure visual quality.
 
-### Economics
-* Price vouchers strategically - consider the voucher value vs mint cost
-* Factor in gas costs and your desired profit margin
+### Troubleshooting
+
+- **Deployment Fails**: Verify wallet connection and testnet token balance.
+- **Funding Issues**: Ensure sufficient USDC in your wallet.
+- **Whitelist Problems**: Confirm whitelist is enabled and addresses are added.
+- **Need Help?** Join our [Discord community](https://discord.gg/CR8nKg5gYB) or contact support via Raven House.
 
 ---
 
-*Ready to create your voucher collection? [Get started on Raven House →](https://app.ravenhouse.xyz/collection/create)*
+_Ready to launch your voucher collection? [Start on Raven House →](https://app.ravenhouse.xyz/collection/launch)_
