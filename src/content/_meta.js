@@ -11,19 +11,7 @@ export default {
   },
   "wallets": {
     "title": "Wallet Setup",
-    "type": "menu",
-    "items": {
-      "obsidion": "Obsidion Wallet",
-      "azguard": "Azguard Wallet"
-    }
   },
 
-  "concepts": {
-    "title": "Core Concepts",
-    "type": "menu",
-    "items": {
-      "aztec": "Aztec Network",
-      "privacy": "Privacy Explained"
-    }
-  }
+
 }
