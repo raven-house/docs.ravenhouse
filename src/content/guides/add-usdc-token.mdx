@@ -5,27 +5,49 @@ description: Step-by-step guide to importing USDC token on Azguard Wallet and us
 
 ---
 
-Azguard Wallet by default doesn't comes with any ERC20 Token, we need to add USDC Token in order to perform operations such as Paid Mint, Purchase, Offer, etc.
+Azguard Wallet by default doesn't come with any ERC20 Token. You need to add the USDC Token to perform various operations across Raven House apps.
+
+## Why do I need Tokens?
+
+### Raven House NFT Marketplace
+If you're using the [Raven House NFT Marketplace](https://app.ravenhouse.xyz), you'll need Tokens to:
+- **Paid Mints** - Mint NFTs from collections with a mint price
+- **Purchase NFTs** - Buy listed NFTs from other users
+- **Make Offers** - Submit offers on NFTs you want to acquire
+
+### Raven Bridge
+If you're using the [Raven Bridge](https://bridge.ravenhouse.xyz), you'll need Tokens to:
+- **Bridge tokens** - Transfer Tokens between Ethereum (L1) and Aztec (L2)
+- **Test bridging flows** - Experiment with cross-layer transfers on testnet
+
+---
 
 ## Add USDC to Azguard Wallet
 
 ### 1. Open Azguard Wallet
 
-When you open the Azguard Wallet, you’ll see the home screen.  
+When you open the Azguard Wallet, you'll see the home screen.
 Click on the **New token** button.
 
 <figure>
   <>![Loading Wallet Issue](/img/docs/get-usdc/new-token-button.jpg)</>
 </figure>
+
 ---
 
 ### 2. Paste the Token Contract Address
 
-Paste the following USDC token address into the field:
+Choose the appropriate USDC token address based on which app you're using:
 
-`0x1c1c0ccb7e42573051384c60d3d162fa3b123ae16dc5ece92754c2dccea1e543`
+#### For Raven House NFT Marketplace
 
-Then click **Import new token**.
+0x1c1c0ccb7e42573051384c60d3d162fa3b123ae16dc5ece92754c2dccea1e543
+
+#### For Raven Bridge
+
+0x0afaafc3b0bdd8b708fec66d77f83e79bcb34cefd5a396bc1680c503c6740bc7
+
+Paste the address into the field, then click **Import new token**.
 
 <figure>
   <>![Loading Wallet Issue](/img/docs/get-usdc/paste-token-address.jpg)</>
@@ -33,30 +55,41 @@ Then click **Import new token**.
 
 ---
 
-### 3. Done! 🎉
+### 3. Done!
 
 You will now see **USDC** listed under your tokens.
 
 <figure>
   <>![USDC Added](/img/docs/get-usdc/token-added.jpg)</>
 </figure>
+
 ---
 
-## Claim 20 USDC Faucet Tokens
+## Claim USDC Faucet Tokens
 
-Now that USDC is imported, follow these steps:
+Now that USDC is imported, you can claim test tokens:
 
+### Option 1: Raven House Faucet (20 USDC)
 1. Go to [https://app.ravenhouse.xyz/faucets](https://app.ravenhouse.xyz/faucets)
-2. Click the **Claim 20 USDC** button.
-3. Sign the transaction in your Azguard Wallet.
+2. Click the **Claim 20 USDC** button
+3. Sign the transaction in your Azguard Wallet
+4. You'll receive **20 USDC test tokens**
 
-✅ You’ll receive **20 USDC test tokens**!
+### Option 2: Raven Bridge Faucet (up to 10 tokens per claim)
+1. Go to [https://bridge.ravenhouse.xyz/faucet](https://bridge.ravenhouse.xyz/faucet)
+2. Select **Aztec (L2)** to receive tokens directly on Aztec
+3. Choose the token and amount (max 10 per claim)
+4. Click **Claim Faucet** and sign the transaction
 
 ---
 
-## ✅ You're Ready!
+## You're Ready!
 
-You can now use test USDC to explore all features on [Raven House](https://app.ravenhouse.xyz).  
+You can now use test USDC to explore all features on:
+- [Raven House NFT Marketplace](https://app.ravenhouse.xyz) - Trade NFTs with privacy
+- [Raven Bridge](https://bridge.ravenhouse.xyz) - Bridge tokens between L1 and L2
+
 Need support? Join us on [Discord](https://discord.com/invite/CR8nKg5gYB)
 
 ---
+
