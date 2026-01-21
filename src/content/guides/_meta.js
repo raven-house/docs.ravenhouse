@@ -6,5 +6,6 @@ export default {
   "nfts": "Minting NFTs",
   "discord": "Discord Integration",
   "privacy": "Privacy Features",
-  "add-usdc-token": "Add USDC token - Azguard"
+  "add-usdc-token": "Add USDC token - Azguard",
+  "add-sender-azguard": "Add Sender - Azguard"
 }
