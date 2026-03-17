@@ -1,0 +1,45 @@
+---
+title: Omni SDK
+description: TypeScript SDK for bridging tokens between Ethereum and Aztec with privacy-preserving features.
+---
+
+# Omni SDK (`@ravenhouse/omni-sdk`)
+
+`@ravenhouse/omni-sdk` is a TypeScript library for building an L1↔L2 token bridge between Ethereum (Sepolia) and Aztec. It supports both public and private (shielded) transfers and takes care of the two-phase bridge protocol, wallet adapters, step tracking, and transaction recovery.
+
+## What it does
+
+| Feature | Details |
+|---|---|
+| **L1 → L2 bridging** | Deposit on Ethereum → sync → claim on Aztec (3 steps) |
+| **L2 → L1 bridging** | Burn on Aztec → prove → withdraw on Ethereum (3-4 steps) |
+| **Public and private modes** | `isPrivate: true` shields the balance on Aztec using ZK proofs |
+| **React hooks** | `useBridgeL1ToL2` / `useBridgeL2ToL1` with real-time step state |
+| **Checkpoint callbacks** | `onDepositComplete` / `onBurnComplete` for mid-flow persistence |
+| **Azguard adapter** | `AzguardBrowserWalletClient` wraps the Azguard browser extension |
+
+## How it fits in your stack
+
+```
+User -> Your UI
+          |
+  omni-sdk React hooks (useBridgeL1ToL2 / useBridgeL2ToL1)
+          |
+  RavenBridge orchestrator
+    |- L1: Wagmi/viem wallet  ->  Ethereum portal contract (Sepolia)
+    +- L2: AzguardBrowserWalletClient  ->  Aztec token bridge contract
+```
+
+## Supported networks
+
+| Network | L1 | L2 |
+|---|---|---|
+| **Devnet** | Sepolia (chain ID 11155111) | Aztec devnet |
+
+A local sandbox can be configured via a custom `NetworkConfig` object.
+
+## Next steps
+
+- [Install the SDK and configure your project](/omni-sdk/installation)
+- [Build your first bridge](/omni-sdk/quick-start)
+- [Full API reference](/omni-sdk/api-reference)

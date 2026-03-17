@@ -1,0 +1,170 @@
+---
+title: Quick Start
+description: Build a working L1↔L2 bridge component using the Omni SDK.
+---
+
+# Quick Start
+
+## 1. Create the bridge instance
+
+Create a `RavenBridge` instance at module scope in the same file as your hook, outside the component, so it is not re-created on every render:
+
+```ts
+import { RavenBridge } from '@ravenhouse/omni-sdk'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+
+// module scope, one instance per file
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+```
+
+## 2. Set up your wallets
+
+You need two wallet clients, one for each chain.
+
+### L1 wallet (Ethereum / Wagmi)
+
+```ts
+import { useConfig } from 'wagmi'
+import { getWalletClient, switchChain } from 'wagmi/actions'
+import { publicActions } from 'viem'
+import { sepolia } from 'wagmi/chains'
+
+const wagmiConfig = useConfig()
+
+// Switch to Sepolia before fetching the client
+await switchChain(wagmiConfig, { chainId: sepolia.id })
+const walletClient = await getWalletClient(wagmiConfig, { chainId: sepolia.id })
+
+// Extend with publicActions so the SDK can read balances and receipts
+const l1Wallet = (walletClient as any).extend(publicActions)
+```
+
+### L2 wallet (Aztec / Azguard)
+
+```ts
+import { AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+
+// wallet is a Wallet instance from @aztec/aztec.js/wallet,
+// obtained from the @aztec/wallet-sdk after the user connects
+const l2Wallet = new AzguardBrowserWalletClient(wallet, aztecAddress)
+```
+
+See [Wallet Setup](/omni-sdk/wallet-setup) for how to get `wallet` and `aztecAddress` from the wallet SDK.
+
+## 3. Bridge L1 -> L2
+
+```tsx
+import { RavenBridge, AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+import { useBridgeL1ToL2 } from '@ravenhouse/omni-sdk/react'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+export function BridgeL1ToL2() {
+  const { bridgeL1ToL2, isLoading, steps, result, error, reset } =
+    useBridgeL1ToL2(bridge as any)
+
+  const handleBridge = async () => {
+    const l1Wallet = /* ... wagmi wallet extended with publicActions */
+    const l2Wallet = /* ... new AzguardBrowserWalletClient(...) */
+
+    await bridgeL1ToL2({
+      l1Wallet,
+      l2Wallet,
+      token: bridge.getToken('ETH')!,
+      amount: '0.01',   // human-readable, e.g. "0.01" ETH
+      isPrivate: true,  // true = shielded Aztec balance
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={handleBridge} disabled={isLoading}>
+        {isLoading ? 'Bridging...' : 'Bridge ETH to Aztec'}
+      </button>
+
+      {steps.map((step) => (
+        <div key={step.id} style={{ marginTop: 8 }}>
+          <strong>{step.label}</strong>: {step.status}
+          {step.txHash && (
+            <a href={step.explorerUrl} target="_blank" rel="noreferrer">
+              {' '}View TX
+            </a>
+          )}
+          {step.error && <span style={{ color: 'red' }}> {step.error.message}</span>}
+        </div>
+      ))}
+
+      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+
+      {result?.success && (
+        <p>
+          Done! Bridged {result.amount} {result.symbol}.{' '}
+          {result.finalTxHash && (
+            <a href={result.explorerUrl} target="_blank" rel="noreferrer">
+              View final TX
+            </a>
+          )}
+        </p>
+      )}
+
+      {(result || error) && (
+        <button onClick={reset}>Reset</button>
+      )}
+    </div>
+  )
+}
+```
+
+## 4. Bridge L2 -> L1
+
+```tsx
+import { RavenBridge, AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+import { useBridgeL2ToL1 } from '@ravenhouse/omni-sdk/react'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+export function BridgeL2ToL1() {
+  const { bridgeL2ToL1, isLoading, steps, result, error, reset } =
+    useBridgeL2ToL1(bridge as any)
+
+  const handleBridge = async () => {
+    const l1Wallet = /* ... */
+    const l2Wallet = /* ... */
+
+    await bridgeL2ToL1({
+      l1Wallet,
+      l2Wallet,
+      token: bridge.getToken('ETH')!,
+      amount: '0.01',
+      isPrivate: true,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={handleBridge} disabled={isLoading}>
+        {isLoading ? 'Withdrawing...' : 'Withdraw ETH to Ethereum'}
+      </button>
+
+      {steps.map((step) => (
+        <div key={step.id}>{step.label}: {step.status}</div>
+      ))}
+
+      {error && <p>Error: {error.message}</p>}
+      {result?.success && <p>Withdrawn! {result.finalTxHash}</p>}
+    </div>
+  )
+}
+```
+
+## Timing
+
+- The hook drives all state. `steps` updates in real-time as each phase completes.
+- The L1->L2 flow usually takes **30-90 seconds** (waiting for 3 L2 blocks to sync).
+- The L2->L1 flow can take **5-15 minutes**. Aztec needs to generate a ZK proof of the block before funds can be released on L1.
+
+For a deeper look at each flow:
+- [Bridge L1 -> L2 in depth](/omni-sdk/bridge-l1-to-l2)
+- [Bridge L2 -> L1 in depth](/omni-sdk/bridge-l2-to-l1)

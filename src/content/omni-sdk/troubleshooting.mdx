@@ -1,0 +1,72 @@
+---
+title: Troubleshooting
+description: Common issues and fixes when using the Omni SDK.
+---
+
+# Troubleshooting
+
+## Sync step is slow (L1 -> L2)
+
+This is expected. The SDK waits for the L1 deposit message to be processed by **3 consecutive L2 blocks**. On devnet that's roughly 30-90 seconds depending on block time.
+
+---
+
+## Proof step takes 5-15 minutes (L2 -> L1)
+
+This is expected. Before Ethereum will release funds from the portal contract, Aztec must submit a zero-knowledge proof of the block containing the burn transaction. On devnet the proving network typically takes 5-15 minutes.
+
+Keep the browser tab open, or implement `onBurnComplete` to persist the checkpoint so the user can come back and retry Step 4 (withdraw) later.
+
+---
+
+## TypeScript: "separate declarations of private property 'config'"
+
+`tsup` inlines the `RavenBridge` class independently in both `dist/index.js` and `dist/react/index.js`, so TypeScript sees two structurally incompatible class declarations.
+
+Cast the bridge instance to `any` when passing to the hooks:
+
+```ts
+useBridgeL1ToL2(bridge as any)
+useBridgeL2ToL1(bridge as any)
+```
+
+---
+
+## `ReferenceError: Buffer is not defined` or `process is not defined`
+
+The Aztec SDK uses Node.js built-ins that are not available in the browser. The polyfills are missing.
+
+**Next.js:** Add the webpack polyfills to `next.config.js`. See [Installation & Setup](/omni-sdk/installation).
+
+**Vite:** Use the `aztecBrowserPolyfills()` Vite plugin from `@ravenhouse/omni-sdk/vite`.
+
+---
+
+## `Error: Ethereum wallet not connected`
+
+Wagmi's `getWalletClient` returned `null`. Either the user hasn't connected a MetaMask/injected wallet yet, or the wallet is on the wrong chain. Make sure you call `switchChain(wagmiConfig, { chainId: sepolia.id })` before `getWalletClient`.
+
+---
+
+## `Error: Aztec wallet not connected`
+
+`AzguardBrowserWalletClient` was instantiated but the Azguard session is invalid or expired.
+
+Check:
+- `window.azguard` exists (extension is installed)
+- `client.connect()` was called and resolved successfully
+- The session in `localStorage` (`azguard:session:omni-sdk`) is not stale. If it is, call `client.connect()` again.
+
+---
+
+## Chain ID mismatch after Aztec upgrade
+
+If Aztec updates the devnet chain ID, `DEVNET_CONFIG.network.l2ChainId` will be stale. Check the current chain ID in the Aztec docs and pass a custom `NetworkConfig` with the correct value.
+
+---
+
+## Funds deposited but never claimed
+
+If the browser was closed between Step 1 (deposit) and Step 3 (claim), the claim secret may be lost. If you implemented `onDepositComplete` and persisted the `DepositCheckpoint`, you can restart the bridge flow to retry the claim. The deposit message stays valid on-chain until it expires.
+
+If you did not persist the checkpoint, reach out on [Discord](https://discord.com/invite/gCPZhWBYQH) for manual recovery help.

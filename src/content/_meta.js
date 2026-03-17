@@ -6,6 +6,9 @@ export default {
   "guides": {
     "title": "Guides",
   },
+  "omni-sdk": {
+    "title": "Omni SDK",
+  },
   "rewards-program": {
     "title": "Raven Rewards Program",
   },

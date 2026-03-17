@@ -1,0 +1,140 @@
+---
+title: Bridge L2 -> L1
+description: Withdraw tokens from Aztec back to Ethereum using the Omni SDK.
+---
+
+# Bridge L2 -> L1
+
+Withdrawing from Aztec (L2) to Ethereum (L1) involves burning tokens on Aztec, waiting for a ZK proof of the block, then triggering the withdrawal on Ethereum.
+
+## Flow
+
+```
+Step 1: Burn       Burn tokens on Aztec + emit exit message (L2 tx)
+Step 2: Mine       Wait for the burn tx to be included in a block
+Step 3: Proof      Wait for Aztec to generate a ZK proof of that block (5-15 min on devnet)
+Step 4: Withdraw   Claim funds on the L1 portal contract (Ethereum tx)
+```
+
+The wait at Step 3 is a protocol requirement. Ethereum won't release the funds until Aztec's prover network submits a validity proof for the block containing the burn.
+
+## Using the React hook
+
+```tsx
+import { RavenBridge } from '@ravenhouse/omni-sdk'
+import { useBridgeL2ToL1 } from '@ravenhouse/omni-sdk/react'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+const { bridgeL2ToL1, isLoading, steps, result, error, reset } =
+  useBridgeL2ToL1(bridge as any)
+```
+
+### Calling `bridgeL2ToL1`
+
+```ts
+await bridgeL2ToL1({
+  l1Wallet,    // wagmi WalletClient extended with publicActions
+  l2Wallet,    // AzguardBrowserWalletClient instance
+  token,       // TokenConfig from bridge.getToken('ETH')
+  amount,      // human-readable string, e.g. "0.05"
+  isPrivate,   // must match how the funds were originally deposited
+})
+```
+
+### Persisting the burn checkpoint
+
+After Step 1 the burn transaction hash is available. Save it so you can show withdrawal status or retry Step 4 if something goes wrong later:
+
+```ts
+import type { BurnCheckpoint } from '@ravenhouse/omni-sdk'
+
+await bridgeL2ToL1({
+  l1Wallet,
+  l2Wallet,
+  token,
+  amount,
+  isPrivate,
+  onBurnComplete: async ({ txHash, blockNumber }: BurnCheckpoint) => {
+    await db.savePendingWithdrawal({
+      userAddress: l1Wallet.account.address,
+      l2TxHash: txHash,
+      blockNumber,
+      amount,
+      tokenSymbol: token.symbol,
+      isPrivate,
+    })
+  },
+})
+```
+
+### Full example
+
+```tsx filename="hooks/useBridgeL2ToL1.ts"
+import { useCallback } from 'react'
+import { useConfig } from 'wagmi'
+import { getWalletClient, switchChain } from 'wagmi/actions'
+import { publicActions } from 'viem'
+import { sepolia } from 'wagmi/chains'
+import { RavenBridge, AzguardBrowserWalletClient, type BurnCheckpoint } from '@ravenhouse/omni-sdk'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+import { useBridgeL2ToL1 as useSdkBridgeL2ToL1 } from '@ravenhouse/omni-sdk/react'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+export function useBridgeL2ToL1(wallet: any, aztecAddress: any) {
+  const wagmiConfig = useConfig()
+
+  const { bridgeL2ToL1: sdkBridge, isLoading, steps, result, error, reset } =
+    useSdkBridgeL2ToL1(bridge as any)
+
+  const bridgeL2ToL1 = useCallback(
+    async (amount: string, isPrivate: boolean) => {
+      await switchChain(wagmiConfig, { chainId: sepolia.id })
+
+      const walletClient = await getWalletClient(wagmiConfig, { chainId: sepolia.id })
+      if (!walletClient) throw new Error('Ethereum wallet not connected')
+
+      const l1Client = (walletClient as any).extend(publicActions)
+      const l2Client = new AzguardBrowserWalletClient(wallet, aztecAddress)
+
+      const token = bridge.getToken('ETH')!
+
+      return (sdkBridge as any)({
+        l1Wallet: l1Client,
+        l2Wallet: l2Client,
+        token,
+        amount,
+        isPrivate,
+        onBurnComplete: async (checkpoint: BurnCheckpoint) => {
+          await myDb.savePendingWithdrawal({
+            l2TxHash: checkpoint.txHash,
+            recipientAddress: walletClient.account.address,
+            amount,
+            isPrivate,
+          })
+        },
+      })
+    },
+    [wagmiConfig, wallet, aztecAddress, sdkBridge],
+  )
+
+  return { bridgeL2ToL1, isLoading, steps, result, error, reset }
+}
+```
+
+## Step IDs
+
+| `step.id` | Description |
+|---|---|
+| `burn` | Burning tokens on Aztec |
+| `mine` | Waiting for block inclusion |
+| `proof` | Waiting for ZK block proof |
+| `withdraw` | Releasing funds on Ethereum |
+
+## Private vs public mode
+
+When `isPrivate: true`, the SDK uses `createAuthWit` + `exit_to_l1_private` so the Aztec side of the transaction is shielded. The L1 withdrawal is always public since Ethereum has no privacy layer.
+
+The `isPrivate` flag must match how the tokens were originally deposited. You can't withdraw privately funds that were deposited publicly, and vice versa.
