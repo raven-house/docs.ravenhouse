@@ -1,0 +1,94 @@
+---
+title: Installation & Setup
+description: Install the Omni SDK and configure your Next.js project for Aztec bridge support.
+---
+
+# Installation & Setup
+
+## Install the package
+
+```bash
+bun add @ravenhouse/omni-sdk
+```
+
+Or with npm/yarn:
+
+```bash
+npm install @ravenhouse/omni-sdk
+yarn add @ravenhouse/omni-sdk
+```
+
+## Peer dependencies
+
+The SDK requires these packages in your project:
+
+```bash
+# Wagmi / viem for L1 wallet
+bun add wagmi viem
+
+# Aztec wallet SDK (for L2 wallet)
+bun add @aztec/aztec.js @aztec/wallet-sdk
+```
+
+## Next.js webpack configuration
+
+Aztec SDK uses Node.js built-ins that are not available in the browser. Add these polyfills to your `next.config.js` (or `next.config.mjs`):
+
+```js filename="next.config.js"
+const webpack = require('webpack')
+
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        'fs/promises': false,
+        net: false,
+        tls: false,
+        tty: false,
+        os: require.resolve('os-browserify/browser'),
+        crypto: require.resolve('crypto-browserify'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer/'),
+        process: require.resolve('process/browser'),
+        util: require.resolve('util/'),
+        path: require.resolve('path-browserify'),
+      }
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          Buffer: ['buffer', 'Buffer'],
+          process: 'process/browser',
+        })
+      )
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        pino: 'pino/browser.js',
+      }
+    }
+    return config
+  },
+}
+
+module.exports = nextConfig
+```
+
+Install the polyfill packages:
+
+```bash
+bun add os-browserify crypto-browserify stream-browserify buffer process util path-browserify
+```
+
+## Vite projects
+
+If you use Vite, the SDK ships a ready-made plugin:
+
+```ts filename="vite.config.ts"
+import { defineConfig } from 'vite'
+import { aztecBrowserPolyfills } from '@ravenhouse/omni-sdk/vite'
+
+export default defineConfig({
+  plugins: [aztecBrowserPolyfills()],
+})
+```
+

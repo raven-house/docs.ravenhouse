@@ -1,0 +1,273 @@
+---
+title: API Reference
+description: Complete API reference for the Omni SDK.
+---
+
+# API Reference
+
+## Package exports
+
+| Import path | Contents |
+|---|---|
+| `@ravenhouse/omni-sdk` | `RavenBridge`, `AzguardBrowserWalletClient`, all types |
+| `@ravenhouse/omni-sdk/react` | `useBridgeL1ToL2`, `useBridgeL2ToL1` |
+| `@ravenhouse/omni-sdk/config` | `DEVNET_CONFIG`, `DEVNET_TOKENS` |
+| `@ravenhouse/omni-sdk/contracts/l2` | `TokenBridgeContract`, `TokenContract` |
+| `@ravenhouse/omni-sdk/ethereum` | `L1TokenPortalManager`, `PortalManager` |
+| `@ravenhouse/omni-sdk/vite` | Vite plugin for browser polyfills |
+
+---
+
+## `RavenBridge`
+
+The main orchestrator class.
+
+### Constructor
+
+```ts
+new RavenBridge(options: { network: NetworkConfig })
+```
+
+| Parameter | Type | Description |
+|---|---|---|
+| `options.network` | `NetworkConfig` | Network and token configuration |
+
+### Methods
+
+#### `bridge.bridgeL1ToL2(params)`
+
+Executes the full L1 -> L2 bridge flow.
+
+```ts
+bridge.bridgeL1ToL2(params: BridgeL1ToL2Params): Promise<BridgeResult>
+```
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `l1Wallet` | `L1WalletClient` | yes | Wagmi wallet client + publicActions |
+| `l2Wallet` | `L2WalletClient` | yes | Azguard wallet adapter |
+| `token` | `TokenConfig` | yes | Token to bridge |
+| `amount` | `string` | yes | Human-readable amount (e.g. `"0.05"`) |
+| `isPrivate` | `boolean` | yes | `true` = shielded Aztec balance |
+| `onStep` | `(step: BridgeStep) => void` | no | Called on each step update |
+| `onDepositComplete` | `(checkpoint: DepositCheckpoint) => void \| Promise<void>` | no | Called after L1 deposit succeeds |
+
+#### `bridge.bridgeL2ToL1(params)`
+
+Executes the full L2 -> L1 bridge flow.
+
+```ts
+bridge.bridgeL2ToL1(params: BridgeL2ToL1Params): Promise<BridgeResult>
+```
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `l1Wallet` | `L1WalletClient` | yes | Wagmi wallet client + publicActions |
+| `l2Wallet` | `L2WalletClient` | yes | Azguard wallet adapter |
+| `token` | `TokenConfig` | yes | Token to withdraw |
+| `amount` | `string` | yes | Human-readable amount |
+| `isPrivate` | `boolean` | yes | Must match how tokens were originally deposited |
+| `onStep` | `(step: BridgeStep) => void` | no | Called on each step update |
+| `onBurnComplete` | `(checkpoint: BurnCheckpoint) => void \| Promise<void>` | no | Called after L2 burn succeeds |
+
+#### `bridge.getToken(symbol)`
+
+```ts
+bridge.getToken(symbol: string): TokenConfig | undefined
+```
+
+#### `bridge.getSupportedTokens()`
+
+```ts
+bridge.getSupportedTokens(): TokenConfig[]
+```
+
+---
+
+## `AzguardBrowserWalletClient`
+
+Adapter that wraps the Azguard browser extension wallet and implements `L2WalletClient`.
+
+```ts
+import { AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+
+const l2Wallet = new AzguardBrowserWalletClient(
+  wallet,        // Wallet from @aztec/aztec.js/wallet
+  aztecAddress,  // AztecAddress of the connected account
+)
+```
+
+Translates SDK operations to direct Aztec.js contract calls:
+
+| Operation | Aztec action |
+|---|---|
+| `claim_private` | `TokenBridge.methods.claim_private(...).send()` |
+| `claim_public` | `TokenBridge.methods.claim_public(...).send()` |
+| `exit_to_l1_public` | `BatchCall([SetPublicAuthwit, exit_to_l1_public]).send()` |
+| `exit_to_l1_private` | `wallet.createAuthWit(burn_private)` then `exit_to_l1_private.send({ authWitnesses })` |
+
+---
+
+## React hooks
+
+### `useBridgeL1ToL2(bridge)`
+
+```ts
+import { useBridgeL1ToL2 } from '@ravenhouse/omni-sdk/react'
+
+const {
+  bridgeL1ToL2,   // (params) => Promise<BridgeResult>
+  isLoading,      // boolean
+  steps,          // BridgeStep[]
+  currentStep,    // BridgeStep | null
+  result,         // BridgeResult | null
+  error,          // Error | null
+  reset,          // () => void
+} = useBridgeL1ToL2(bridge)
+```
+
+### `useBridgeL2ToL1(bridge)`
+
+```ts
+import { useBridgeL2ToL1 } from '@ravenhouse/omni-sdk/react'
+
+const {
+  bridgeL2ToL1,
+  isLoading,
+  steps,
+  currentStep,
+  result,
+  error,
+  reset,
+} = useBridgeL2ToL1(bridge)
+```
+
+> **TypeScript note:** If you get a "separate declarations of private property 'config'" error, cast the bridge instance: `useBridgeL1ToL2(bridge as any)`. This is a known tsup bundling artifact where `RavenBridge` gets inlined independently in each entry point.
+
+---
+
+## Types
+
+### `BridgeStep`
+
+```ts
+interface BridgeStep {
+  id: string           // 'deposit' | 'sync' | 'claim' | 'burn' | 'mine' | 'proof' | 'withdraw'
+  label: string
+  description?: string
+  status: 'pending' | 'loading' | 'completed' | 'error'
+  txHash?: string
+  explorerUrl?: string
+  error?: Error
+}
+```
+
+### `BridgeResult`
+
+```ts
+interface BridgeResult {
+  success: boolean
+  direction: 'l1-to-l2' | 'l2-to-l1'
+  amount: string
+  symbol: string
+  finalTxHash?: string
+  explorerUrl?: string
+  message: string
+  steps: BridgeStep[]
+}
+```
+
+### `DepositCheckpoint`
+
+```ts
+interface DepositCheckpoint {
+  claimSecret: string       // needed to claim on L2 - persist this securely
+  messageLeafIndex: number  // position of the deposit message in the L1->L2 message tree
+}
+```
+
+### `BurnCheckpoint`
+
+```ts
+interface BurnCheckpoint {
+  txHash: string      // L2 transaction hash of the burn
+  blockNumber: number // L2 block number containing the burn
+}
+```
+
+### `TokenConfig`
+
+```ts
+interface TokenConfig {
+  symbol: string
+  name: string
+  decimals: number
+  icon?: string
+  isNative?: boolean
+  l1: {
+    tokenAddress: string | null
+    portalAddress: string
+    feeAssetHandlerAddress: string
+  }
+  l2: {
+    tokenAddress: string
+    bridgeAddress: string
+    dripper?: string
+  }
+}
+```
+
+### `NetworkConfig`
+
+```ts
+interface NetworkConfig {
+  name: string
+  environment: 'devnet' | 'testnet' | 'local'
+  tokens: TokenConfig[]
+  network: {
+    nodeUrl: string
+    l1RpcUrl: string
+    l1ChainId: number
+    l2ChainId: number
+  }
+  settings: {
+    skipSandbox: boolean
+    version: string
+  }
+  timeouts: {
+    deployTimeout: number
+    txTimeout: number
+    waitTimeout: number
+  }
+  blockexplorer: {
+    aztecscan: string
+    aztecExplorer: string
+  }
+  backend: {
+    zk_verify: string
+  }
+  contracts: {
+    escrow: string
+    usdc: string
+  }
+}
+```
+
+### `L2WalletClient`
+
+```ts
+interface L2WalletClient {
+  account: string       // Aztec address as hex string
+  sessionId: string
+  request(method: string, params: any): Promise<any>
+}
+```
+
+### `L1WalletClient`
+
+```ts
+interface L1WalletClient {
+  account: { address: string }
+  extend(actions: any): L1WalletClient
+}
+```

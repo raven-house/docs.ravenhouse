@@ -1,0 +1,164 @@
+---
+title: Bridge L1 -> L2
+description: Move tokens from Ethereum to Aztec using the Omni SDK.
+---
+
+# Bridge L1 -> L2
+
+Bridging from Ethereum (L1) to Aztec (L2) is a three-step process.
+
+## Flow
+
+```
+Step 1: Deposit    User approves + deposits tokens to the L1 portal contract
+Step 2: Sync       SDK waits for the deposit message to land in 3 L2 blocks (~30-90s)
+Step 3: Claim      SDK mints tokens into the user's Aztec account
+```
+
+After Step 3 the tokens appear in the user's Aztec wallet as either:
+- **Public balance** (`isPrivate: false`) visible on-chain
+- **Private / shielded balance** (`isPrivate: true`) hidden behind ZK proofs
+
+## Using the React hook
+
+```tsx
+import { RavenBridge } from '@ravenhouse/omni-sdk'
+import { useBridgeL1ToL2 } from '@ravenhouse/omni-sdk/react'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+const { bridgeL1ToL2, isLoading, steps, result, error, reset } =
+  useBridgeL1ToL2(bridge as any)
+```
+
+### Calling `bridgeL1ToL2`
+
+```ts
+await bridgeL1ToL2({
+  l1Wallet,        // wagmi WalletClient extended with publicActions
+  l2Wallet,        // AzguardBrowserWalletClient instance
+  token,           // TokenConfig from bridge.getToken('ETH')
+  amount,          // human-readable string, e.g. "0.05"
+  isPrivate,       // true = shielded Aztec balance
+})
+```
+
+### Persisting the claim secret
+
+The deposit step creates an on-chain message with a claim secret. If the user closes the browser after Step 1 but before Step 3, that secret is gone and the funds will be stuck until the message expires. Use `onDepositComplete` to save it right after Step 1:
+
+```ts
+await bridgeL1ToL2({
+  l1Wallet,
+  l2Wallet,
+  token,
+  amount,
+  isPrivate,
+  onDepositComplete: async ({ claimSecret, messageLeafIndex }) => {
+    // save to your database so the user can retry the claim later
+    await db.savePendingClaim({
+      userAddress: aztecAddress.toString(),
+      claimSecret,
+      messageLeafIndex: messageLeafIndex.toString(),
+      amount,
+      tokenSymbol: token.symbol,
+      isPrivate,
+    })
+  },
+})
+```
+
+> Errors thrown inside `onDepositComplete` are silently swallowed. The bridge continues regardless. Make sure your persistence logic handles its own errors.
+
+### Full example with persistence
+
+```tsx filename="hooks/useBridgeL1ToL2.ts"
+import { useCallback } from 'react'
+import { useConfig } from 'wagmi'
+import { getWalletClient, switchChain } from 'wagmi/actions'
+import { publicActions } from 'viem'
+import { sepolia } from 'wagmi/chains'
+import { RavenBridge, AzguardBrowserWalletClient, type DepositCheckpoint } from '@ravenhouse/omni-sdk'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+import { useBridgeL1ToL2 as useSdkBridgeL1ToL2 } from '@ravenhouse/omni-sdk/react'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+
+export function useBridgeL1ToL2(wallet: any, aztecAddress: any) {
+  const wagmiConfig = useConfig()
+
+  const { bridgeL1ToL2: sdkBridge, isLoading, steps, result, error, reset } =
+    useSdkBridgeL1ToL2(bridge as any)
+
+  const bridgeL1ToL2 = useCallback(
+    async (amount: string, isPrivate: boolean) => {
+      await switchChain(wagmiConfig, { chainId: sepolia.id })
+
+      const walletClient = await getWalletClient(wagmiConfig, { chainId: sepolia.id })
+      if (!walletClient) throw new Error('Ethereum wallet not connected')
+
+      const l1Client = (walletClient as any).extend(publicActions)
+      const l2Client = new AzguardBrowserWalletClient(wallet, aztecAddress)
+
+      const token = bridge.getToken('ETH')!
+
+      return sdkBridge({
+        l1Wallet: l1Client,
+        l2Wallet: l2Client,
+        token,
+        amount,
+        isPrivate,
+        onDepositComplete: async (checkpoint: DepositCheckpoint) => {
+          await myDb.savePendingClaim({ ...checkpoint, amount, isPrivate })
+        },
+      })
+    },
+    [wagmiConfig, wallet, aztecAddress, sdkBridge],
+  )
+
+  return { bridgeL1ToL2, isLoading, steps, result, error, reset }
+}
+```
+
+## Resuming a stuck claim
+
+If the user deposited but never claimed (e.g. browser closed during Step 2), you can run the claim step on its own using `executeClaim` from the SDK. This is what `useL2Claim` does in `raven-bridge-frontend` for the transactions recovery page.
+
+```ts
+import { executeClaim, AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+import { DEVNET_CONFIG } from '@ravenhouse/omni-sdk/config'
+import { parseUnits } from 'viem'
+
+// load the checkpoint you saved in onDepositComplete
+const { claimSecret, messageLeafIndex, amount, tokenSymbol, isPrivate } =
+  await db.getPendingClaim(userAddress)
+
+const token = bridge.getToken(tokenSymbol)!
+const l2Client = new AzguardBrowserWalletClient(wallet, aztecAddress)
+
+await executeClaim(
+  l2Client,
+  {
+    bridgeAddress: token.l2.bridgeAddress,
+    recipient: aztecAddress.toString(),
+    amount: parseUnits(amount, token.decimals),
+    secret: claimSecret,
+    index: messageLeafIndex.toString(),
+    isPrivate,
+    portal: token.l1.portalAddress,
+    token: token.l2.tokenAddress,
+  },
+  DEVNET_CONFIG.blockexplorer.aztecscan,
+)
+```
+
+## Step IDs
+
+| `step.id` | Description |
+|---|---|
+| `deposit` | L1 token approval + portal deposit |
+| `sync` | Waiting for L2 to process the message |
+| `claim` | Minting tokens on Aztec |
+
+Each step has a `status` of `pending`, `loading`, `completed`, or `error`.

@@ -1,0 +1,125 @@
+---
+title: Configuration
+description: Configure networks and tokens for the Omni SDK.
+---
+
+# Configuration
+
+## Built-in configs
+
+The SDK ships a ready-made configuration for Aztec devnet:
+
+```ts
+import { DEVNET_CONFIG, DEVNET_TOKENS } from '@ravenhouse/omni-sdk/config'
+
+const bridge = new RavenBridge({ network: DEVNET_CONFIG })
+```
+
+`DEVNET_CONFIG` points to:
+- **L2 node**: `https://v4-devnet-2.aztec-labs.com`
+- **L1 RPC**: Sepolia via Infura
+- **Block explorer**: `https://devnet.aztecscan.xyz`
+
+## Custom network config
+
+To use a local sandbox or a different network, provide your own `NetworkConfig`:
+
+```ts
+import type { NetworkConfig } from '@ravenhouse/omni-sdk'
+import { RavenBridge } from '@ravenhouse/omni-sdk'
+
+const SANDBOX_CONFIG: NetworkConfig = {
+  name: 'sandbox',
+  environment: 'local',
+  tokens: [
+    {
+      symbol: 'ETH',
+      name: 'Ethereum',
+      decimals: 18,
+      l1: {
+        tokenAddress: '0x<l1-token>',
+        portalAddress: '0x<l1-portal>',
+        feeAssetHandlerAddress: '0x<fee-handler>',
+      },
+      l2: {
+        tokenAddress: '0x<l2-token>',
+        bridgeAddress: '0x<l2-bridge>',
+      },
+    },
+  ],
+  network: {
+    nodeUrl: 'http://localhost:8080',
+    l1RpcUrl: 'http://localhost:8545',
+    l1ChainId: 31337,
+    l2ChainId: 1,
+  },
+  settings: {
+    skipSandbox: false,
+    version: '3.0.0-devnet.20251212',
+  },
+  timeouts: {
+    deployTimeout: 1200000,
+    txTimeout: 180000,
+    waitTimeout: 60000,
+  },
+  blockexplorer: {
+    aztecscan: 'http://localhost:3000',
+    aztecExplorer: 'http://localhost:3001',
+  },
+  backend: {
+    zk_verify: 'http://localhost:3004/verify-identity/register',
+  },
+  contracts: {
+    escrow: '0x0000000000000000000000000000000000000000',
+    usdc: '0x<usdc-address>',
+  },
+}
+
+const bridge = new RavenBridge({ network: SANDBOX_CONFIG })
+```
+
+## Token configuration shape
+
+Each token in `NetworkConfig.tokens` follows the `TokenConfig` interface:
+
+```ts
+interface TokenConfig {
+  symbol: string        // e.g. 'ETH', 'USDC'
+  name: string
+  decimals: number      // 18 for ETH, 6 for USDC
+  icon?: string         // path to icon asset
+  isNative?: boolean    // true for the native gas token
+  l1: {
+    tokenAddress: string | null          // ERC-20 address (null for native ETH)
+    portalAddress: string                // L1 portal contract address
+    feeAssetHandlerAddress: string       // Fee handler contract address
+  }
+  l2: {
+    tokenAddress: string    // Aztec L2 token contract address
+    bridgeAddress: string   // Aztec token bridge contract address
+    dripper?: string        // Optional faucet address (devnet only)
+  }
+}
+```
+
+## Looking up tokens
+
+```ts
+// Get a specific token by symbol (case-insensitive)
+const ethToken = bridge.getToken('ETH')
+const usdcToken = bridge.getToken('usdc')
+
+// Get all supported tokens
+const tokens = bridge.getSupportedTokens()
+// → TokenConfig[]
+```
+
+## Devnet token addresses (reference)
+
+The addresses currently registered in `DEVNET_CONFIG`:
+
+| Token | L1 token | L1 portal | L2 token | L2 bridge |
+|---|---|---|---|---|
+| ETH | `0x7443...969` | `0xa8c4...f13` | `0x12c9...adb` | `0x27cc...c48` |
+
+These are the addresses Raven House deploys and maintains. They may change between devnet resets. Always use the addresses from `DEVNET_CONFIG` rather than hardcoding them.

@@ -1,0 +1,137 @@
+---
+title: Wallet Setup
+description: Connect Azguard (L2) and Wagmi (L1) wallets to the Omni SDK.
+---
+
+# Wallet Setup
+
+You need two wallet connections: one for Ethereum (L1) and one for Aztec (L2).
+
+## L1 wallet (Wagmi / Ethereum)
+
+The SDK expects a Wagmi `WalletClient` extended with viem's `publicActions`. This gives the SDK both read and write access on the L1 side.
+
+### Setup
+
+```ts
+import { useConfig } from 'wagmi'
+import { getWalletClient, switchChain } from 'wagmi/actions'
+import { publicActions } from 'viem'
+import { sepolia } from 'wagmi/chains'
+
+const wagmiConfig = useConfig()
+
+// Switch to the right chain first
+await switchChain(wagmiConfig, { chainId: sepolia.id })
+
+const walletClient = await getWalletClient(wagmiConfig, { chainId: sepolia.id })
+if (!walletClient) throw new Error('No Ethereum wallet connected')
+
+const l1Wallet = (walletClient as any).extend(publicActions)
+```
+
+`l1Wallet` can now be passed to `bridgeL1ToL2` or `bridgeL2ToL1`.
+
+### Wagmi provider
+
+Your app needs to be wrapped with `WagmiProvider` and `QueryClientProvider`:
+
+```tsx filename="app/layout.tsx"
+import { WagmiProvider, createConfig, http } from 'wagmi'
+import { sepolia } from 'wagmi/chains'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { injected } from 'wagmi/connectors'
+
+const wagmiConfig = createConfig({
+  chains: [sepolia],
+  connectors: [injected()],
+  transports: { [sepolia.id]: http() },
+})
+
+const queryClient = new QueryClient()
+
+export default function RootLayout({ children }) {
+  return (
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+---
+
+## L2 wallet (Azguard / Aztec)
+
+The SDK ships `AzguardBrowserWalletClient`, an adapter that wraps an Aztec wallet and implements the `L2WalletClient` interface.
+
+### What is the wallet object?
+
+`AzguardBrowserWalletClient` takes any object that conforms to `Wallet` from `@aztec/aztec.js/wallet`. In the browser this comes from `@aztec/wallet-sdk`. The Azguard extension exposes it via a `WalletProvider`. In `raven-bridge-frontend` this is stored in `azguardWalletAtom` as a `Wallet` instance obtained from the wallet SDK after the user connects.
+
+```ts
+import type { Wallet } from '@aztec/aztec.js/wallet'
+import type { WalletProvider } from '@aztec/wallet-sdk/manager'
+
+// provider comes from @aztec/wallet-sdk after user connects
+const wallet: Wallet = provider.getWallet()
+const address = wallet.getAddress()
+```
+
+### Wrap it
+
+```ts
+import { AzguardBrowserWalletClient } from '@ravenhouse/omni-sdk'
+import { AztecAddress } from '@aztec/aztec.js'
+
+const l2Wallet = new AzguardBrowserWalletClient(
+  wallet,   // Wallet from @aztec/aztec.js/wallet
+  address,  // AztecAddress of the connected account
+)
+```
+
+`l2Wallet` can now be passed to `bridgeL1ToL2` or `bridgeL2ToL1`.
+
+---
+
+## Custom L2 wallet
+
+If you have a different Aztec wallet (e.g. a custom `AccountWallet` from `@aztec/aztec.js`), implement `L2WalletClient` directly:
+
+```ts
+import type { L2WalletClient } from '@ravenhouse/omni-sdk'
+
+const myL2Wallet: L2WalletClient = {
+  account: '0x...',         // Aztec address as hex string
+  sessionId: 'my-session',
+
+  async request(method: string, params: any) {
+    // method is always 'execute'
+    // params.operations is an array of bridge operations
+    if (method !== 'execute') throw new Error(`Unknown method: ${method}`)
+
+    for (const op of params.operations) {
+      switch (op.type) {
+        case 'claim_private':
+          // TokenBridge.claim_private(...).send()
+          break
+        case 'claim_public':
+          // TokenBridge.claim_public(...).send()
+          break
+        case 'exit_to_l1_public':
+          // BatchCall: SetPublicAuthwit + exit_to_l1_public
+          break
+        case 'exit_to_l1_private':
+          // createAuthWit for burn + exit_to_l1_private with authWit
+          break
+      }
+    }
+
+    return [{ kind: 'send_transaction', result: [{ txHash: '...', blockNumber: 0 }] }]
+  },
+}
+```
+
+See `AzguardBrowserWalletClient.ts` in the SDK source for a complete reference implementation.
